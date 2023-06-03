@@ -18,11 +18,6 @@ int main(int argc, char** argv)
 
     if (opts.read_bytecode)
         print_all(*entry_file, opts.filename);
-    else
-    {
-        JVMInterpreter interpreter;
-        interpreter.run(entry_file);
-    }
 
     delete entry_file;
 
