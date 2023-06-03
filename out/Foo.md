@@ -1,0 +1,303 @@
+# **Foo**
+
+## **General Information**
+Magic `0xCAFEBABE`  
+Minor version `0`  
+Major version `46`[`1.2`]  
+Constant Pool Count `37`  
+Access Flags `0x0020` [` ACC_SUPER `]  
+This Class `7` `<Foo>`  
+Super Class `10` `<Goo>`  
+Interfaces Count `0`  
+Fields Count `0`  
+Methods Count `3`  
+Attributes Count `1`
+
+## **Constant Pool**  
+
+<details> <summary>Show more</summary> <hr>
+
+### [1] *CONSTANT_Methodref_info*
+- Class Index `10`
+- Name And Type Index `20`
+
+### [2] *CONSTANT_Fieldref_info*
+- Class Index `21`
+- Class Name `<java/lang/System>`
+- Name And Type Index `22`
+- Name And Type `<out:Ljava/io/PrintStream;>`
+
+### [3] *CONSTANT_String_info*
+- String Index `23`
+- String `<2>`
+
+### [4] *CONSTANT_Methodref_info*
+- Class Index `24`
+- Name And Type Index `25`
+
+### [5] *CONSTANT_String_info*
+- String Index `26`
+- String `<3>`
+
+### [6] *CONSTANT_String_info*
+- String Index `27`
+- String `<4>`
+
+### [7] *CONSTANT_Class_info*
+- Name Index `28`
+- Class Name `<Foo>`
+
+### [8] *CONSTANT_Methodref_info*
+- Class Index `7`
+- Name And Type Index `20`
+
+### [9] *CONSTANT_String_info*
+- String Index `29`
+- String `<1>`
+
+### [10] *CONSTANT_Class_info*
+- Name Index `30`
+- Class Name `<Goo>`
+
+### [11] *CONSTANT_Utf8_info*
+- Length `6`
+- Bytes [ `<init>`]
+
+### [12] *CONSTANT_Utf8_info*
+- Length `3`
+- Bytes [ `()V`]
+
+### [13] *CONSTANT_Utf8_info*
+- Length `4`
+- Bytes [ `Code`]
+
+### [14] *CONSTANT_Utf8_info*
+- Length `15`
+- Bytes [ `LineNumberTable`]
+
+### [15] *CONSTANT_Utf8_info*
+- Length `4`
+- Bytes [ `main`]
+
+### [16] *CONSTANT_Utf8_info*
+- Length `22`
+- Bytes [ `([Ljava/lang/String;)V`]
+
+### [17] *CONSTANT_Utf8_info*
+- Length `8`
+- Bytes [ `<clinit>`]
+
+### [18] *CONSTANT_Utf8_info*
+- Length `10`
+- Bytes [ `SourceFile`]
+
+### [19] *CONSTANT_Utf8_info*
+- Length `8`
+- Bytes [ `Foo.java`]
+
+### [20] *CONSTANT_NameAndType_info*
+- Name Index `11`
+- Descriptor Index `12`
+
+### [21] *CONSTANT_Class_info*
+- Name Index `31`
+- Class Name `<java/lang/System>`
+
+### [22] *CONSTANT_NameAndType_info*
+- Name Index `32`
+- Descriptor Index `33`
+
+### [23] *CONSTANT_Utf8_info*
+- Length `1`
+- Bytes [ `2`]
+
+### [24] *CONSTANT_Class_info*
+- Name Index `34`
+- Class Name `<java/io/PrintStream>`
+
+### [25] *CONSTANT_NameAndType_info*
+- Name Index `35`
+- Descriptor Index `36`
+
+### [26] *CONSTANT_Utf8_info*
+- Length `1`
+- Bytes [ `3`]
+
+### [27] *CONSTANT_Utf8_info*
+- Length `1`
+- Bytes [ `4`]
+
+### [28] *CONSTANT_Utf8_info*
+- Length `3`
+- Bytes [ `Foo`]
+
+### [29] *CONSTANT_Utf8_info*
+- Length `1`
+- Bytes [ `1`]
+
+### [30] *CONSTANT_Utf8_info*
+- Length `3`
+- Bytes [ `Goo`]
+
+### [31] *CONSTANT_Utf8_info*
+- Length `16`
+- Bytes [ `java/lang/System`]
+
+### [32] *CONSTANT_Utf8_info*
+- Length `3`
+- Bytes [ `out`]
+
+### [33] *CONSTANT_Utf8_info*
+- Length `21`
+- Bytes [ `Ljava/io/PrintStream;`]
+
+### [34] *CONSTANT_Utf8_info*
+- Length `19`
+- Bytes [ `java/io/PrintStream`]
+
+### [35] *CONSTANT_Utf8_info*
+- Length `7`
+- Bytes [ `println`]
+
+### [36] *CONSTANT_Utf8_info*
+- Length `21`
+- Bytes [ `(Ljava/lang/String;)V`]
+
+</details> <br>
+
+## **Interfaces**
+
+<details> <summary>Show more</summary> <hr>
+
+</details><br>
+
+## **Fields**
+
+<details> <summary>Show more</summary> <hr>
+
+</details><br>
+
+## **Methods**
+<details> <summary>Show more</summary> <hr>
+
+### [0] `<init>` 
+- Methods Access Flags `0x1` [` ACC_PUBLIC `]
+- Name Index `11` `<<init>>`
+- Descriptor Index `12` `<()V>`
+- Attribute Count `1`
+<details><summary>Show attributes</summary>
+
+### [0] Code
+- Generic info 
+  - Attribute name index `13` `<Code>`
+  - Attribute length `53`
+
+- Specific info
+  - Maximum stack size `2`
+  - Maximum local variables `1`
+  - Code length `21`
+- Bytecode
+```
+```
+### [0] LineNumberTable
+- Generic info 
+  - Attribute name index `14` `<LineNumberTable>`
+  - Attribute length `14`
+
+- Specific info
+  - Line number table length `3`  
+
+| Number | Start PC | Line Number |  
+|--------|----------|-------------|  
+|       0|         0|            4|  
+|       1|         4|            3|  
+|       2|        12|            4|  
+
+
+</details><br>
+
+### [1] `main` 
+- Methods Access Flags `0x9` [` `]
+- Name Index `15` `<main>`
+- Descriptor Index `16` `<([Ljava/lang/String;)V>`
+- Attribute Count `1`
+<details><summary>Show attributes</summary>
+
+### [0] Code
+- Generic info 
+  - Attribute name index `13` `<Code>`
+  - Attribute length `49`
+
+- Specific info
+  - Maximum stack size `2`
+  - Maximum local variables `2`
+  - Code length `17`
+- Bytecode
+```
+```
+### [0] LineNumberTable
+- Generic info 
+  - Attribute name index `14` `<LineNumberTable>`
+  - Attribute length `14`
+
+- Specific info
+  - Line number table length `3`  
+
+| Number | Start PC | Line Number |  
+|--------|----------|-------------|  
+|       0|         0|            6|  
+|       1|         8|            7|  
+|       2|        16|            8|  
+
+
+</details><br>
+
+### [2] `<clinit>` 
+- Methods Access Flags `0x8` [` ACC_STATIC `]
+- Name Index `17` `<<clinit>>`
+- Descriptor Index `12` `<()V>`
+- Attribute Count `1`
+<details><summary>Show attributes</summary>
+
+### [0] Code
+- Generic info 
+  - Attribute name index `13` `<Code>`
+  - Attribute length `33`
+
+- Specific info
+  - Maximum stack size `2`
+  - Maximum local variables `0`
+  - Code length `9`
+- Bytecode
+```
+```
+### [0] LineNumberTable
+- Generic info 
+  - Attribute name index `14` `<LineNumberTable>`
+  - Attribute length `6`
+
+- Specific info
+  - Line number table length `1`  
+
+| Number | Start PC | Line Number |  
+|--------|----------|-------------|  
+|       0|         0|            2|  
+
+
+</details><br>
+
+</details><br>
+
+## **Attributes**
+<details> <summary>Show more</summary> <hr>
+
+### [0] SourceFile
+- Generic info 
+  - Attribute name index `18` `<SourceFile>`
+  - Attribute length `2`
+
+- Specific info
+  - Source file name index `19` `<Foo.java>`
+
+</details><br>
+
