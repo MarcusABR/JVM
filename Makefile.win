@@ -1,0 +1,15 @@
+make:
+	mkdir build\.\src\
+ 
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\main.cpp -o build\.\src\main.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\constant_pool_info.cpp -o build\.\src\constant_pool_info.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_file.cpp -o build\.\src\class_file.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\debug.cpp -o build\.\src\debug.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\utils.cpp -o build\.\src\utils.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\dump_class_file.cpp -o build\.\src\dump_class_file.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\frame.cpp -o build\.\src\frame.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_loader.cpp -o build\.\src\class_loader.o
+	mkdir build\.\src\instructions\
+
+clean:
+	rmdir /s build
