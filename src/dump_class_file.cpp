@@ -20,7 +20,8 @@ ofstream outfile;
 void open_outfile(string filename)
 {
     create_dir();
-    outfile = ofstream("./out/" + filename + ".md");
+    //outfile = ofstream("./out/" + filename + ".md");
+    outfile = ofstream("./out/" + filename + ".txt");
 }
 
 /**
