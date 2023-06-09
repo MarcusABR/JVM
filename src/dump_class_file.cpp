@@ -39,7 +39,7 @@ void print_all(class_file &class_f, string filepath)
     filename = filename.substr(0, filename.find('.')); 
     open_outfile(filename);
 
-    outfile << "# **" << filename << "**" << endl << endl;
+    outfile << "* --" << filename << "--" << endl << endl;
     print_general_info(class_f);
     print_pool(class_f.constant_pool);
     print_interfaces(class_f);
@@ -49,7 +49,7 @@ void print_all(class_file &class_f, string filepath)
     outfile.close();
     pos_counter = 0;
 
-    cout << "Generated \"" << filename + ".md\" at /out/" << endl;
+    cout << "Generated \"" << filename + ".txt\" at /out/" << endl;
 }
 
 /**
@@ -58,36 +58,36 @@ void print_all(class_file &class_f, string filepath)
  */
 void print_general_info(class_file &class_f)
 {
-    outfile << "## **General Information**" << endl;
+    outfile << "* --General Information--" << endl;
     ios_base::fmtflags f(outfile.flags());
-    outfile << "Magic " << "`0x" << uppercase << hex << class_f.magic << "`  " << endl;
+    outfile << "Magic " << "'0x" << uppercase << hex << class_f.magic << "'  " << endl;
     outfile.flags(f);
     
-    outfile << "Minor version `" << class_f.minor_version << "`  " << endl;
-    outfile << "Major version `" << class_f.major_version << "`";
-    outfile << "[`" << get_version(class_f.major_version, class_f.minor_version) << "`]  " << endl;
+    outfile << "Minor version '" << class_f.minor_version << "'  " << endl;
+    outfile << "Major version '" << class_f.major_version << "'";
+    outfile << "['" << get_version(class_f.major_version, class_f.minor_version) << "']  " << endl;
     
-    outfile << "Constant Pool Count `" << class_f.constant_pool_count << "`  " << endl;
+    outfile << "Constant Pool Count '" << class_f.constant_pool_count << "'  " << endl;
     
     ios_base::fmtflags g(outfile.flags());
-    outfile << "Access Flags `0x" << setw(4) << setfill('0') << hex << class_f.access_flag << "`";
-    outfile << " [`" << get_access_flags(class_f.access_flag, CLASS) << "`]  " << endl;
+    outfile << "Access Flags '0x" << setw(4) << setfill('0') << hex << class_f.access_flag << "'";
+    outfile << " ['" << get_access_flags(class_f.access_flag, CLASS) << "']  " << endl;
     outfile.flags(g);
     
     auto this_class = to_cp_info(class_f.constant_pool[class_f.this_class - 1])->_class->name_idx;
     auto this_class_name = *(to_cp_info(class_f.constant_pool[this_class - 1])->_utf8);
-    outfile << "This Class `" << class_f.this_class << "` ";
-    outfile << "`<" << get_utf8_content(this_class_name)  << ">`  " << endl;
+    outfile << "This Class '" << class_f.this_class << "' ";
+    outfile << "'<" << get_utf8_content(this_class_name)  << ">'  " << endl;
     
     auto super_class = to_cp_info(class_f.constant_pool[class_f.super_class - 1])->_class->name_idx;
     auto super_class_name = *(to_cp_info(class_f.constant_pool[super_class - 1])->_utf8);
-    outfile << "Super Class `" << class_f.super_class << "` ";
-    outfile << "`<" << get_utf8_content(super_class_name) << ">`  " << endl;
+    outfile << "Super Class '" << class_f.super_class << "' ";
+    outfile << "'<" << get_utf8_content(super_class_name) << ">'  " << endl;
 
-    outfile << "Interfaces Count `" << class_f.interfaces_count << "`  " << endl;
-    outfile << "Fields Count `" << class_f.fields_count << "`  " << endl;
-    outfile << "Methods Count `" << class_f.methods_count << "`  " << endl;
-    outfile << "Attributes Count `" << class_f.attributes_count << "`" << endl;
+    outfile << "Interfaces Count '" << class_f.interfaces_count << "'  " << endl;
+    outfile << "Fields Count '" << class_f.fields_count << "'  " << endl;
+    outfile << "Methods Count '" << class_f.methods_count << "'  " << endl;
+    outfile << "Attributes Count '" << class_f.attributes_count << "'" << endl;
     outfile << endl;
 }
 
@@ -248,15 +248,15 @@ string get_access_flags(u2 access_flags, int type)
 void print_pool(cp_info_vector &constant_pool)
 {
     unsigned int cp_counter = 1;
-    outfile << "## **Constant Pool**  " << endl << endl;
-    outfile << "<details> <summary>Show more</summary> <hr>" << endl << endl;
+    outfile << "* --Constant Pool--  " << endl << endl;
+    outfile << "________________________________________________________________" << endl << endl;
 
     for (auto cp_item : constant_pool) 
     {
         auto cp_info = to_cp_info(cp_item);
         cp_info->dump_info_to_file(constant_pool, cp_counter);
     }
-    outfile << "</details> <br>" << endl << endl;
+    outfile << "________________________________________________________________" << endl << endl;
 }
 
 /**
@@ -278,17 +278,16 @@ string get_utf8_content(CONSTANT_utf8_info &utf8)
  */
 void print_interfaces(class_file &class_f)
 {
-    outfile << "## **Interfaces**" << endl << endl;
-    outfile << "<details> <summary>Show more</summary> <hr>" << endl << endl;
+    outfile << "* --Interfaces--" << endl << endl;
+    outfile << "________________________________________________________________" <<endl << endl;
 
     for (auto interface : class_f.interfaces)
     {
         auto interface_name_index = to_cp_info(class_f.constant_pool[interface - 1])->_class->name_idx;
         auto interface_name = *(to_cp_info(class_f.constant_pool[interface_name_index - 1])->_utf8);
-        outfile << "- Interface: `" << interface << "` ";
-        outfile << "`<" << get_utf8_content(interface_name) << ">`" << endl;
+        outfile << "- Interface: '" << interface << "' ";
+        outfile << "'<" << get_utf8_content(interface_name) << ">'" << endl;
     }
-    outfile << "</details><br>" << endl << endl;
 }
 
 /**
@@ -298,32 +297,32 @@ void print_interfaces(class_file &class_f)
 void print_fields(class_file &class_f)
 {
     unsigned int field_counter = 0;
-    outfile << "## **Fields**" << endl << endl;
-    outfile << "<details> <summary>Show more</summary> <hr>" << endl << endl;
+    outfile << "* --Fields--" << endl << endl;
+    outfile << endl << endl;
 
     for (auto field : class_f.fields) 
     {
         auto field_name = *(to_cp_info(class_f.constant_pool[field.name_idx - 1])->_utf8);
         auto field_descriptor = *(to_cp_info(class_f.constant_pool[field.descriptor_idx - 1])->_utf8);
 
-        outfile << "### [" << field_counter++ << "] `" << get_utf8_content(field_name) << "`" << endl;
+        outfile << "--> [" << field_counter++ << "] '" << get_utf8_content(field_name) << "'" << endl;
 
         ios_base::fmtflags f(outfile.flags());
-        outfile << "- Fields Access Flags `0x" << hex << setw(4) << setfill('0') << field.access_flags << "`" << endl;
-        outfile << "[`" << get_access_flags(field.access_flags, FIELD) << "`]" << endl;
+        outfile << "- Fields Access Flags '0x" << hex << setw(4) << setfill('0') << field.access_flags << "'" << endl;
+        outfile << "['" << get_access_flags(field.access_flags, FIELD) << "']" << endl;
         outfile.flags(f);
 
-        outfile << "- Name Index `" << field.name_idx << "` ";
-        outfile << "`<" << get_utf8_content(field_name) << ">`" << endl;
-        outfile << "- Descriptor Index `" << field.descriptor_idx << "` ";
-        outfile << "`<" << get_utf8_content(field_descriptor) << ">`" << endl;
-        outfile << "- Attribute Count `" << field.attr_count << "`" << endl;
+        outfile << "- Name Index '" << field.name_idx << "' ";
+        outfile << "'<" << get_utf8_content(field_name) << ">'" << endl;
+        outfile << "- Descriptor Index '" << field.descriptor_idx << "' ";
+        outfile << "'<" << get_utf8_content(field_descriptor) << ">'" << endl;
+        outfile << "- Attribute Count '" << field.attr_count << "'" << endl;
         
         outfile << "<details><summary>Show attributes</summary>" << endl << endl;
         print_attributes_vector(field.attr, class_f.constant_pool);
-        outfile << "</details><br>" << endl << endl;
+        outfile << "________________________________________________________________" << endl << endl;
     }
-    outfile << "</details><br>" << endl << endl;
+    outfile <<  "________________________________________________________________"<<endl << endl;
 }
 
 /**
@@ -333,32 +332,31 @@ void print_fields(class_file &class_f)
 void print_methods(class_file &class_f)
 {
     unsigned int method_counter = 0;
-    outfile << "## **Methods**" << endl;
-    outfile << "<details> <summary>Show more</summary> <hr>" << endl << endl;
+    outfile << "* --Methods--" << endl;
+    outfile << endl << endl;
 
     for (auto method : class_f.methods) 
     {
         auto method_name = *(to_cp_info(class_f.constant_pool[method.name_idx - 1])->_utf8);
         auto method_descriptor = *(to_cp_info(class_f.constant_pool[method.descriptor_idx - 1])->_utf8);
 
-        outfile << "### [" << method_counter++ << "] `" << get_utf8_content(method_name) << "` " << endl;
+        outfile << "--> [" << method_counter++ << "] '" << get_utf8_content(method_name) << "' " << endl;
 
         ios_base::fmtflags f(outfile.flags());
-        outfile << "- Methods Access Flags " << "`0x" << uppercase << hex << method.access_flags << "` ";
+        outfile << "- Methods Access Flags " << "'0x" << uppercase << hex << method.access_flags << "' ";
         outfile.flags(f);
 
-        outfile << "[`" << get_access_flags(method.access_flags, METHOD) << "`]" << endl;
-        outfile << "- Name Index `" << method.name_idx << "` ";
-        outfile << "`<" << get_utf8_content(method_name) << ">`" << endl;
-        outfile << "- Descriptor Index `" << method.descriptor_idx << "` ";
-        outfile << "`<" << get_utf8_content(method_descriptor) << ">`" << endl;
-        outfile << "- Attribute Count `" << method.attr_count << "`" << endl;
+        outfile << "['" << get_access_flags(method.access_flags, METHOD) << "']" << endl;
+        outfile << "- Name Index '" << method.name_idx << "' ";
+        outfile << "'<" << get_utf8_content(method_name) << ">'" << endl;
+        outfile << "- Descriptor Index '" << method.descriptor_idx << "' ";
+        outfile << "'<" << get_utf8_content(method_descriptor) << ">'" << endl;
+        outfile << "- Attribute Count '" << method.attr_count << "'" << endl;
         
-        outfile << "<details><summary>Show attributes</summary>" << endl << endl;
+        outfile << endl << endl;
         print_attributes_vector(method.attr, class_f.constant_pool);
-        outfile << "</details><br>" << endl << endl;
     }
-    outfile << "</details><br>" << endl << endl;
+    outfile << "________________________________________________________________" << endl << endl;
 }
 
 /**
@@ -367,10 +365,10 @@ void print_methods(class_file &class_f)
  */
 void print_class_attributes(class_file &class_f)
 {
-    outfile << "## **Attributes**" << endl;
-    outfile << "<details> <summary>Show more</summary> <hr>" << endl << endl;
+    outfile << "* --Attributes--" << endl;
+    outfile << "________________________________________________________________" << endl << endl;
     print_attributes_vector(class_f.attributes, class_f.constant_pool);
-    outfile << "</details><br>" << endl << endl;
+    outfile << "________________________________________________________________"<< endl << endl;
 }
 
 /**
@@ -385,5 +383,5 @@ void print_attributes_vector(attr_info_vector &attr_vector, cp_info_vector &cons
         auto attr_info = to_attr_info(attr);
         attr_info->dump_info_to_file(constant_pool, attr_counter);
     }
-    outfile << endl;
+    outfile <<  endl;
 }

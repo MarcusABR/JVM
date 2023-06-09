@@ -101,12 +101,12 @@ void Attribute_Info::dump_info_to_file(cp_info_vector &constant_pool, unsigned i
 {
     auto attribute_name = *(to_cp_info(constant_pool[attribute_name_index - 1])->_utf8);
 
-    outfile << "### [" << counter++ << "] " << get_utf8_content(attribute_name) << endl;
+    outfile << "--> [" << counter++ << "] " << get_utf8_content(attribute_name) << endl;
 
     outfile << "- Generic info " << endl;
-    outfile << "  - Attribute name index `" << attribute_name_index << "`";
-    outfile << " `<" << get_utf8_content(attribute_name) << ">`" << endl;
-    outfile << "  - Attribute length `" << attribute_length << "`" << endl << endl;
+    outfile << "  - Attribute name index '" << attribute_name_index << "'";
+    outfile << " '<" << get_utf8_content(attribute_name) << ">'" << endl;
+    outfile << "  - Attribute length '" << attribute_length << "'" << endl << endl;
     outfile << "- Specific info" << endl;
     
     switch (tag) 
@@ -163,7 +163,7 @@ ConstantValue_attribute::ConstantValue_attribute(ifstream &file, cp_info_vector&
  */
 void ConstantValue_attribute::dump_to_file(cp_info_vector &constant_pool)
 {
-    outfile << "  - Constant value index `" << constantvalue_index << "`" << endl;
+    outfile << "  - Constant value index '" << constantvalue_index << "'" << endl;
 }
 
 /**
@@ -196,11 +196,11 @@ Code_attribute::Code_attribute(ifstream &file, cp_info_vector& constant_pool)
  */
 void Code_attribute::dump_to_file(cp_info_vector &constant_pool)
 {
-    outfile << "  - Maximum stack size `" << max_stack << "`" << endl;
-    outfile << "  - Maximum local variables `" << max_locals << "`" << endl;
-    outfile << "  - Code length `" << code_length << "`" << endl;
+    outfile << "  - Maximum stack size '" << max_stack << "'" << endl;
+    outfile << "  - Maximum local variables '" << max_locals << "'" << endl;
+    outfile << "  - Code length '" << code_length << "'" << endl;
     outfile << "- Bytecode" << endl;
-    outfile << "```" << endl;
+    outfile << "'''" << endl;
 
     for (int i = 0; i < code_length; i++)
     {
@@ -222,7 +222,7 @@ void Code_attribute::dump_to_file(cp_info_vector &constant_pool)
             cout.flags(f);
         // }
     }
-    outfile << "```" << endl;
+    outfile << "'''" << endl;
 
     unsigned int attr_counter = 0;
     for (auto attr : attributes)
@@ -256,7 +256,7 @@ LineNumberTable_attribute::LineNumberTable_attribute(ifstream &file, cp_info_vec
 */
 void LineNumberTable_attribute::dump_to_file(cp_info_vector &constant_pool)
 {
-    outfile << "  - Line number table length `" << line_number_table_length << "`  " << endl << endl;
+    outfile << "  - Line number table length '" << line_number_table_length << "'  " << endl << endl;
     outfile << "| Number | Start PC | Line Number |  " << endl;
     outfile << "|--------|----------|-------------|  " << endl;
     unsigned int counter = 0;
@@ -330,8 +330,8 @@ SourceFile_attribute::SourceFile_attribute(ifstream &file, cp_info_vector& const
 void SourceFile_attribute::dump_to_file(cp_info_vector &constant_pool)
 {
     auto sourcefile_name = *(to_cp_info(constant_pool[sourcefile_index - 1])->_utf8);
-    outfile << "  - Source file name index `" << sourcefile_index << "`";
-    outfile << " `<" << get_utf8_content(sourcefile_name) << ">`" << endl;
+    outfile << "  - Source file name index '" << sourcefile_index << "'";
+    outfile << " '<" << get_utf8_content(sourcefile_name) << ">'" << endl;
 }
 
 /**
