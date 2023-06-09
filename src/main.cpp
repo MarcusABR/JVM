@@ -16,8 +16,7 @@ int main(int argc, char** argv)
     ClassLoader loader;
     class_file *entry_file = loader.load(opts.filename);
 
-    if (opts.read_bytecode)
-        print_all(*entry_file, opts.filename);
+   print_all(*entry_file, opts.filename);
 
     delete entry_file;
 
