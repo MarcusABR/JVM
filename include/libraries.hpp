@@ -13,7 +13,6 @@
 #include "cmd_arguments.hpp"
 #include "constant_pool_info.hpp"
 #include "dump_class_file.hpp"
-#include "frame.hpp"
 #include "method_area.hpp"
 #include "types.hpp"
 #include "utils.hpp"
