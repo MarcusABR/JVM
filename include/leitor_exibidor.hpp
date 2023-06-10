@@ -1,5 +1,5 @@
-#ifndef _DUMP_CLASS_FILE_HPP
-#define _DUMP_CLASS_FILE_HPP
+#ifndef _LEITOR_EXIBIDOR_HPP
+#define _LEITOR_EXIBIDOR_HPP
 
 #include "class_file.hpp"
 #include "constant_pool_info.hpp"
@@ -20,4 +20,4 @@ void exibir_campos(class_file &class_f);
 void exibir_metodos(class_file &class_f);
 void exibir_atributos_de_classe(class_file &class_f);
 
-#endif // _DUMP_CLASS_FILE
+#endif // _LEITOR_EXIBIDOR
