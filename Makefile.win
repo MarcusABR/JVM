@@ -6,7 +6,7 @@ make:
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_file.cpp -o build\.\src\class_file.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\debug.cpp -o build\.\src\debug.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\utils.cpp -o build\.\src\utils.o
-	g++ -std=c++11 -I.\include -I.\include\instructions -c src\dump_class_file.cpp -o build\.\src\dump_class_file.o
+	g++ -std=c++11 -I.\include -I.\include\instructions -c src\leitor_exibidor.cpp -o build\.\src\leitor_exibidor.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\frame.cpp -o build\.\src\frame.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_loader.cpp -o build\.\src\class_loader.o
 	mkdir build\.\src\instructions\
@@ -24,7 +24,7 @@ make:
 	
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\attributes.cpp -o build\.\src\attributes.o
 	
-	g++ -std=c++11 .\build\.\src\main.o .\build\.\src\constant_pool_info.o .\build\.\src\class_file.o .\build\.\src\debug.o .\build\.\src\utils.o .\build\.\src\dump_class_file.o .\build\.\src\frame.o .\build\.\src\class_loader.o .\build\.\src\attributes.o -o jvm
+	g++ -std=c++11 .\build\.\src\main.o .\build\.\src\constant_pool_info.o .\build\.\src\class_file.o .\build\.\src\debug.o .\build\.\src\utils.o .\build\.\src\leitor_exibidor.o .\build\.\src\frame.o .\build\.\src\class_loader.o .\build\.\src\attributes.o -o jvm
 
 clean:
 	rmdir /s build

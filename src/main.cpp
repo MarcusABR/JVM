@@ -2,23 +2,23 @@
 
 using namespace std;
 
-/**
- * @brief Entry point of the JVM
- * @param argc number of args
- * @param argv vector of args (the .class file)
- * @return the status of the execution 
- */
+
 int main(int argc, char** argv) 
 {
-    CmdArgs opts;
-    opts.init(argc, argv);
+    if (argc <= 1) {
+        cerr << "Faltam argumentos" << endl;
+        exit(EXIT_FAILURE);
+    }
 
+    auto nome_arquivo = static_cast<string>(argv[argc - 1]);
+    
     ClassLoader loader;
-    class_file *entry_file = loader.load(opts.filename);
+    class_file *arquivo_de_entrada = loader.carregar(nome_arquivo);
 
-   print_all(*entry_file, opts.filename);
+    ler_exibir_arquivo(*arquivo_de_entrada, nome_arquivo);
 
-    delete entry_file;
+    delete arquivo_de_entrada;
 
     return 0;
 }
+//kkkkk

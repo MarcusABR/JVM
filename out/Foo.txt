@@ -1,6 +1,6 @@
-* --Foo--
+CLASSE: Foo
 
-* --General Information--
+----------Informações Gerais----------
 Magic '0xCAFEBABE'  
 Minor version '0'  
 Major version '46'['1.2']  
@@ -13,9 +13,8 @@ Fields Count '0'
 Methods Count '3'  
 Attributes Count '1'
 
-* --Constant Pool--  
+----------Constant Pool----------
 
-________________________________________________________________
 
 --> [1] *CONSTANT_Methodref_info*
 - Class Index '10'
@@ -165,17 +164,17 @@ ________________________________________________________________
 
 ________________________________________________________________
 
-* --Interfaces--
+----------Interfaces----------
 
 ________________________________________________________________
 
-* --Fields--
+----------Fields----------
 
 
 
 ________________________________________________________________
 
-* --Methods--
+----------Methods----------
 
 
 --> [0] '<init>' 
@@ -194,22 +193,17 @@ ________________________________________________________________
   - Maximum stack size '2'
   - Maximum local variables '1'
   - Code length '21'
-- Bytecode
-'''
-'''
 --> [0] LineNumberTable
 - Generic info 
   - Attribute name index '14' '<LineNumberTable>'
   - Attribute length '14'
 
 - Specific info
-  - Line number table length '3'  
+  --- Line number table length: '3---  
 
-| Number | Start PC | Line Number |  
-|--------|----------|-------------|  
-|       0|         0|            4|  
-|       1|         4|            3|  
-|       2|        12|            4|  
+ Number:        0 Start PC:          0 Line Number:             4  
+ Number:        1 Start PC:          4 Line Number:             3  
+ Number:        2 Start PC:         12 Line Number:             4  
 
 
 --> [1] 'main' 
@@ -228,22 +222,17 @@ ________________________________________________________________
   - Maximum stack size '2'
   - Maximum local variables '2'
   - Code length '17'
-- Bytecode
-'''
-'''
 --> [0] LineNumberTable
 - Generic info 
   - Attribute name index '14' '<LineNumberTable>'
   - Attribute length '14'
 
 - Specific info
-  - Line number table length '3'  
+  --- Line number table length: '3---  
 
-| Number | Start PC | Line Number |  
-|--------|----------|-------------|  
-|       0|         0|            6|  
-|       1|         8|            7|  
-|       2|        16|            8|  
+ Number:        0 Start PC:          0 Line Number:             6  
+ Number:        1 Start PC:          8 Line Number:             7  
+ Number:        2 Start PC:         16 Line Number:             8  
 
 
 --> [2] '<clinit>' 
@@ -262,25 +251,20 @@ ________________________________________________________________
   - Maximum stack size '2'
   - Maximum local variables '0'
   - Code length '9'
-- Bytecode
-'''
-'''
 --> [0] LineNumberTable
 - Generic info 
   - Attribute name index '14' '<LineNumberTable>'
   - Attribute length '6'
 
 - Specific info
-  - Line number table length '1'  
+  --- Line number table length: '1---  
 
-| Number | Start PC | Line Number |  
-|--------|----------|-------------|  
-|       0|         0|            2|  
+ Number:        0 Start PC:          0 Line Number:             2  
 
 
 ________________________________________________________________
 
-* --Attributes--
+----------Attributes----------
 ________________________________________________________________
 
 --> [0] SourceFile

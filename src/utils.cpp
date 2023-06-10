@@ -1,18 +1,13 @@
 #include "../include/utils.hpp"
 #include "../include/class_file.hpp"
-#include "../include/dump_class_file.hpp"
+#include "../include/leitor_exibidor.hpp"
 #include <cmath>
 #include <limits>
 #include <sys/stat.h>
 
-/**
-* @brief Calculate to double
-* @param high the most significant bit
-* @param low the least significant bit
-*/
-double calc_double(u4 high, u4 low)
+double ler_double(u4 high, u4 low)
 {
-    u8 bits = calc_long(high, low);
+    u8 bits = ler_long(high, low);
     if (bits == 0x7ff0000000000000L)
         return numeric_limits<double>::infinity();
     else if (bits == 0xfff0000000000000L)
@@ -30,11 +25,8 @@ double calc_double(u4 high, u4 low)
     }
 }
 
-/**
- * @brief Calculate to float
- * @param bytes the run time constant pool
- */
-float calc_float(u4 bytes)
+
+float ler_float(u4 bytes)
 {
     if (bytes == 0x7f800000)
         return numeric_limits<float>::infinity();
@@ -56,47 +48,156 @@ float calc_float(u4 bytes)
     }
 }
 
-/**
-* @brief Calculate to long
-* @param high the most significant bit
-* @param low the least significant bit
-*/
-long long calc_long(u4 high, u4 low)
+long long ler_long(u4 high, u4 low)
 {
     auto l = ((u8) high << 32) | low;
     return (long long) l;
 }
 
-/**
- * @brief Creates a file descriptor
- * @param filename the name of the file
- * @return ifstream the file descriptor
- */
-ifstream open_file(string &filename)
+
+ifstream abrir_arquivo(string &nome_arquivo)
 {
-    ifstream file(filename, ios::binary);
-    return file;
+    ifstream arquivo(nome_arquivo, ios::binary);
+    return arquivo;
 }
 
-/**
- * @brief Retrieves the name stored in a Constant_Class_Info instance in the constant pool
- * @param constant_pool a reference to the class_file constant pool
- * @param idx index of the constant pool item
- * @return the name of the class 
- */
-string get_name(cp_info_vector &constant_pool, u2 idx)
+
+string ler_nome(cp_info_vector &constant_pool, u2 idx)
 {
-    return to_cp_info(constant_pool[idx - 1])->_class->get_content(constant_pool);
+    return to_cp_info(constant_pool[idx - 1])->_class->get_conteudo(constant_pool);
 }
 
-/**
- * @brief Checks existence of a file
- * @param name the file name
- * @return true if file exists
- * @return false if file doesnt exists
- */
-bool exists(string &name)
+
+bool existe(string &nome)
 {
     struct stat buffer;   
-    return (stat (name.c_str(), &buffer) == 0); 
+    return (stat (nome.c_str(), &buffer) == 0); 
+}
+
+union Nibble
+{
+    u2 h16;
+    struct {
+        unsigned int n0 : 4;
+        unsigned int n1 : 4;
+        unsigned int n2 : 4;
+        unsigned int n3 : 4;
+    } nb;
+};
+
+string ler_flags_acesso(u2 flags_acesso, int type)
+{
+    string classe_acessos = " ";
+    
+    Nibble n;
+    n.h16 = flags_acesso;
+
+    unsigned int t3 = n.nb.n3 << 12;
+    unsigned int t2 = n.nb.n2 << 8;
+    unsigned int t1 = n.nb.n1 << 4;
+    unsigned int t0 = n.nb.n0;
+    vector<unsigned int> flag_v = {t3, t2, t1, t0};
+
+    for (auto flag : flag_v)
+    {
+        switch (flag)
+        {
+            case ACC_PUBLIC:
+                classe_acessos += "ACC_PUBLIC ";
+                break;
+            case ACC_FINAL:
+                classe_acessos += "ACC_FINAL ";
+                break;
+            case ACC_SYNTHETIC:
+                classe_acessos += "ACC_SYNTHETIC ";
+                break;
+        }
+        if (type == CLASS)
+        {
+            switch (flag)
+            {
+                case ACC_SUPER:
+                    classe_acessos += "ACC_SUPER ";
+                    break;
+                case ACC_INTERFACE:
+                    classe_acessos += "ACC_INTERFACE ";
+                    break;
+                case ACC_ABSTRACT:
+                    classe_acessos += "ACC_ABSTRACT ";
+                    break;
+                case ACC_ANNOTATION:
+                    classe_acessos += "ACC_ANNOTATION ";
+                    break;
+                case ACC_ENUM:
+                    classe_acessos += "ACC_ENUM ";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (type == FIELD)
+        {
+            switch (flag)
+            {
+                case ACC_ENUM:
+                    classe_acessos += "ACC_ENUM ";
+                    break;
+                case ACC_PRIVATE:
+                    classe_acessos += "ACC_PRIVATE ";
+                    break;
+                case ACC_PROTECTED:
+                    classe_acessos += "ACC_PROTECTED ";
+                    break;
+                case ACC_STATIC:
+                    classe_acessos += "ACC_STATIC ";
+                    break;
+                case ACC_VOLATILE:
+                    classe_acessos += "ACC_VOLATILE ";
+                    break;
+                case ACC_TRANSIENT:
+                    classe_acessos += "ACC_TRANSIENT ";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if (type == METHOD)
+        {
+            switch (flag)
+            {
+                case ACC_ABSTRACT:
+                    classe_acessos += "ACC_ABSTRACT ";
+                    break;
+                case ACC_PRIVATE:
+                    classe_acessos += "ACC_PRIVATE ";
+                    break;
+                case ACC_PROTECTED:
+                    classe_acessos += "ACC_PROTECTED ";
+                    break;
+                case ACC_STATIC:
+                    classe_acessos += "ACC_STATIC ";
+                    break;
+                case ACC_SYNCHRONIZED:
+                    classe_acessos += "ACC_SYNCHRONIZED ";
+                    break;
+                case ACC_BRIDGE:
+                    classe_acessos += "ACC_BRIDGE ";
+                    break;
+                case ACC_VARARGS:
+                    classe_acessos += "ACC_VARARGS ";
+                    break;
+                case ACC_NATIVE:
+                    classe_acessos += "ACC_NATIVE ";
+                    break;
+                case ACC_STRICT:
+                    classe_acessos += "ACC_STRICT ";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+            classe_acessos = "###########ERRO########## - Flag de acesso inválida";
+    }
+    return classe_acessos;
 }
