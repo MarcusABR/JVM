@@ -4,7 +4,7 @@
 #include "attributes.hpp"
 #include "class_file.hpp"
 #include "class_loader.hpp"
-#include "cmd_arguments.hpp"
+#include <iostream>
 #include "constant_pool_info.hpp"
 #include "leitor_exibidor.hpp"
 #include "method_area.hpp"
