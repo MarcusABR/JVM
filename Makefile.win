@@ -4,23 +4,10 @@ make:
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\main.cpp -o build\.\src\main.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\constant_pool_info.cpp -o build\.\src\constant_pool_info.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_file.cpp -o build\.\src\class_file.o
-	
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\utils.cpp -o build\.\src\utils.o
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\leitor_exibidor.cpp -o build\.\src\leitor_exibidor.o
-	
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\class_loader.cpp -o build\.\src\class_loader.o
 	mkdir build\.\src\instructions\
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	g++ -std=c++11 -I.\include -I.\include\instructions -c src\attributes.cpp -o build\.\src\attributes.o
 	
