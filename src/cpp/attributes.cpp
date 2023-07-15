@@ -1,6 +1,6 @@
-#include "../include/attributes.hpp"
-#include "../include/leitor_exibidor.hpp"
-#include "../include/utils.hpp"
+#include "../hpp/attributes.hpp"
+#include "../hpp/leitor_exibidor.hpp"
+#include "../hpp/utils.hpp"
 #include <iomanip>
 #include <iostream>
 

@@ -1,7 +1,7 @@
-#include "../include/class_file.hpp"
-#include "../include/constant_pool_info.hpp"
-#include "../include/attributes.hpp"
-#include "../include/utils.hpp"
+#include "../hpp/class_file.hpp"
+#include "../hpp/constant_pool_info.hpp"
+#include "../hpp/attributes.hpp"
+#include "../hpp/utils.hpp"
 
 using namespace std;
 

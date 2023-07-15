@@ -1,22 +1,14 @@
-#include "../include/constant_pool_info.hpp"
-#include "../include/class_file.hpp"
-#include "../include/dump_class_file.hpp"
-#include "../include/utils.hpp"
+#include "../hpp/constant_pool_info.hpp"
+#include "../hpp/class_file.hpp"
+#include "../hpp/leitor_exibidor.hpp"
+#include "../hpp/utils.hpp"
 #include <string>
 
-extern ofstream outfile;
+extern ofstream arquivo_saida;
 
-/**
- * @brief Construct a new cp_item object
- * @param tag a valid value of the CONSTANT_Types enum
- */
+
 CP_Item::CP_Item(u1 tag) : tag((CONSTANT_Types)tag) {}
 
-/**
- * @brief Construct a new cp_info object
- * @param tag a valid value of the CONSTANT_Types enum
- * @param file the input .class file
- */
 CP_Info::CP_Info(u1 tag, ifstream &file)
 : CP_Item(tag)
 {
@@ -69,9 +61,6 @@ CP_Info::CP_Info(u1 tag, ifstream &file)
     }
 }
 
-/**
- * @brief Destroy the cp_info object
- */
 CP_Info::~CP_Info() 
 {
     switch (tag) 
@@ -94,349 +83,247 @@ CP_Info::~CP_Info()
     }
 }
 
-/**
- * @brief  Dump CP_Info specific information to the markdown outfile
- * @param constant_pool the class_file object constant pool
- * @param counter a reference to the current constant pool index
- */
-void CP_Info::dump_info_to_file(cp_info_vector &constant_pool, unsigned int &counter)
+
+void CP_Info::exibir_info(cp_info_vector &constant_pool, unsigned int &counter)
 {
     switch (tag) 
     {
         case CONSTANT_Utf8:
-            outfile << "### [" << counter++ << "] *CONSTANT_Utf8_info*" << endl;
-            _utf8->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Utf8_info*" << endl;
+            _utf8->exibir();
             break;
         case CONSTANT_Integer:
-            outfile << "### [" << counter++ << "] *CONSTANT_Integer_info*" << endl;
-            _integer->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Integer_info*" << endl;
+            _integer->exibir();
             break;
         case CONSTANT_Float:
-            outfile << "### [" << counter++ << "] *CONSTANT_Float_info*" << endl;
-            _float->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Float_info*" << endl;
+            _float->exibir();
             break;
         case CONSTANT_Long:
-            outfile << "### [" << counter++ << "] *CONSTANT_Long_info*" << endl;
-            _long->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Long_info*" << endl;
+            _long->exibir();
             break;
         case CONSTANT_Double:
-            outfile << "### [" << counter++ << "] *CONSTANT_Double_info*" << endl;
-            _double->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Double_info*" << endl;
+            _double->exibir();
             break;
         case CONSTANT_Class:
-            outfile << "### [" << counter++ << "] *CONSTANT_Class_info*" << endl;
-            _class->dump_to_file(constant_pool);
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Class_info*" << endl;
+            _class->exibir(constant_pool);
             break;
         case CONSTANT_String:
-            outfile << "### [" << counter++ << "] *CONSTANT_String_info*" << endl;
-            _string->dump_to_file(constant_pool);
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_String_info*" << endl;
+            _string->exibir(constant_pool);
             break;
         case CONSTANT_Fieldref:
-            outfile << "### [" << counter++ << "] *CONSTANT_Fieldref_info*" << endl;
-            _fieldref->dump_to_file(constant_pool);
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Fieldref_info*" << endl;
+            _fieldref->exibir(constant_pool);
             break;
         case CONSTANT_Methodref:
-            outfile << "### [" << counter++ << "] *CONSTANT_Methodref_info*" << endl;
-            _methodref->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_Methodref_info*" << endl;
+            _methodref->exibir();
             break;
         case CONSTANT_InterfaceMethodref:
-            outfile << "### [" << counter++ << "] *CONSTANT_InterfaceMethodref_info*" << endl;
-            _interface_methodref->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_InterfaceMethodref_info*" << endl;
+            _interface_methodref->exibir();
             break;
         case CONSTANT_NameAndType:
-            outfile << "### [" << counter++ << "] *CONSTANT_NameAndType_info*" << endl;
-            _name_and_type->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_NameAndType_info*" << endl;
+            _name_and_type->exibir();
             break;
         case CONSTANT_MethodHandle:
-            outfile << "### [" << counter++ << "] *CONSTANT_MethodHandle_info*" << endl;
-            _method_handle->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_MethodHandle_info*" << endl;
+            _method_handle->exibir();
             break;
         case CONSTANT_MethodType:
-            outfile << "### [" << counter++ << "] *CONSTANT_MethodType_info*" << endl;
-            _method_type->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_MethodType_info*" << endl;
+            _method_type->exibir();
             break;
         case CONSTANT_InvokeDynamic:
-            outfile << "### [" << counter++ << "] *CONSTANT_InvokeDynamic_info*" << endl;
-            _invoke_dynamic->dump_to_file();
+            arquivo_saida << "--> [" << counter++ << "] *CONSTANT_InvokeDynamic_info*" << endl;
+            _invoke_dynamic->exibir();
             break;
         case CONSTANT_Continuation:
-            outfile << "### [" << counter++ << "] *(large numeric continued)*" << endl << endl;
+            arquivo_saida << "--> [" << counter++ << "] *(large numeric continued)*" << endl << endl;
             break;
     }
 }
 
-/**
- * @brief Function that retrieves the relevent content of a CP_Info object as a string
- * @param constant_pool the class_file object constant pool
- * @return the string representing the CP_Info content
- */
-string CP_Info::get_content(cp_info_vector &constant_pool)
+string CP_Info::get_conteudo(cp_info_vector &constant_pool)
 {
     switch (tag) 
     {
-        case CONSTANT_Integer: return _integer->get_content();
-        case CONSTANT_Float: return _float->get_content();
-        case CONSTANT_Long: return _long->get_content();
-        case CONSTANT_Double: return _double->get_content();
-        case CONSTANT_String: return _string->get_content(constant_pool);
-        case CONSTANT_Methodref: return _methodref->get_content(constant_pool);
-        case CONSTANT_Fieldref: return _fieldref->get_content(constant_pool);
-        case CONSTANT_Class: return _class->get_content(constant_pool);
+        case CONSTANT_Integer: return _integer->get_conteudo();
+        case CONSTANT_Float: return _float->get_conteudo();
+        case CONSTANT_Long: return _long->get_conteudo();
+        case CONSTANT_Double: return _double->get_conteudo();
+        case CONSTANT_String: return _string->get_conteudo(constant_pool);
+        case CONSTANT_Methodref: return _methodref->get_conteudo(constant_pool);
+        case CONSTANT_Fieldref: return _fieldref->get_conteudo(constant_pool);
+        case CONSTANT_Class: return _class->get_conteudo(constant_pool);
         default: return "Invalid tag";
     }
 }
 
-/**
- * @brief Construct a new Constant_UTF8_Info object
- * @param file the input .class file
- */
+
 CONSTANT_utf8_info::CONSTANT_utf8_info(ifstream &file) 
 {
-    length = read_bytes<u2>(file);
+    length = ler_bytes_big_endian<u2>(file);
 
     for (int i = 0; i < length; i++)
-        bytes.push_back(read_bytes<u1>(file));
+        bytes.push_back(ler_bytes_big_endian<u1>(file));
 }
 
-/**
- * @brief Dump Constant_UTF8 specfic information to the markdown outfile
- */
-void CONSTANT_utf8_info::dump_to_file()
+void CONSTANT_utf8_info::exibir()
 {
-    outfile << "- Length `" << length << "`" << endl;
-    outfile << "- Bytes [ `" << get_utf8_content(*this) << "`]" << endl << endl;
+    arquivo_saida << "- Length '" << length << "'" << endl;
+    arquivo_saida << "- Bytes [ '" << exibir_utf8(*this) << "']" << endl << endl;
 }
 
-/**
- * @brief Function that retrieves the bytes stored in Constant_Utf8_Info as a string
- * @return the UTF-8 string 
- */
-string CONSTANT_utf8_info::get_content()
+string CONSTANT_utf8_info::get_conteudo()
 {
-    return get_utf8_content(*this);
+    return exibir_utf8(*this);
 }
 
-/**
- * @brief Construct a new Constant_Float_Info object
- * @param file the input .class file
- */
 CONSTANT_integer_info::CONSTANT_integer_info(ifstream &file) 
 {
-    bytes = read_bytes<u4>(file);
+    bytes = ler_bytes_big_endian<u4>(file);
 }
 
-/**
- * @brief Dump Constant_integer specfic information to the markdown outfile
- */
-void CONSTANT_integer_info::dump_to_file()
+void CONSTANT_integer_info::exibir()
 {
-    outfile << "- Bytes `" << bytes << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Bytes '" << bytes << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Function that retrieves the bytes stored in Constant_Integer_Info as a string
- * @return integer converted to a string 
- */
-string CONSTANT_integer_info::get_content()
+string CONSTANT_integer_info::get_conteudo()
 {
     return to_string(bytes);
 }
 
-/**
- * @brief Construct a new Constant_Float_Info object
- * @param file the input .class file
- */
 CONSTANT_float_info::CONSTANT_float_info(ifstream &file) 
 {
-    bytes = read_bytes<u4>(file);
+    bytes = ler_bytes_big_endian<u4>(file);
 }
 
-/**
- * @brief Dump Constant_float specfic information to the markdown outfile
- */
-void CONSTANT_float_info::dump_to_file()
+void CONSTANT_float_info::exibir()
 {
-    ios_base::fmtflags f(outfile.flags());
-    outfile << "- Bytes `0x" << hex << bytes << "`" << endl;
-    outfile.flags(f);
-    outfile << "- Float `" << calc_float(bytes) << "`" << endl;
-    outfile << endl;
+    ios_base::fmtflags f(arquivo_saida.flags());
+    arquivo_saida << "- Bytes '0x" << hex << bytes << "'" << endl;
+    arquivo_saida.flags(f);
+    arquivo_saida << "- Float '" << ler_float(bytes) << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Function that retrieves the bytes stored in Constant_Float_Info as a string
- * @return float converted to a string 
- */
-string CONSTANT_float_info::get_content()
+string CONSTANT_float_info::get_conteudo()
 {
-    return to_string(calc_float(bytes));
+    return to_string(ler_float(bytes));
 }
 
-/**
- * @brief Construct a new Constant_Long_Info object
- * @param file the input .class file
- */
 CONSTANT_long_info::CONSTANT_long_info(ifstream &file) 
 {
-    high_bytes = read_bytes<u4>(file);
-    low_bytes = read_bytes<u4>(file);
+    high_bytes = ler_bytes_big_endian<u4>(file);
+    low_bytes = ler_bytes_big_endian<u4>(file);
 }
 
-/**
- * @brief Dump Constant_long specfic information to the markdown outfile
- */
-void CONSTANT_long_info::dump_to_file()
+void CONSTANT_long_info::exibir()
 {
-    ios_base::fmtflags f(outfile.flags());
-    outfile << "- High Bytes `0x" << hex << high_bytes << "`" << endl;
-    outfile << "- Low Bytes `0x" << hex << low_bytes << "`" << endl;
-    outfile.flags(f);
-    outfile << "- Long `" << calc_long(high_bytes, low_bytes) << "`" << endl;
-    outfile << endl;
+    ios_base::fmtflags f(arquivo_saida.flags());
+    arquivo_saida << "- High Bytes '0x" << hex << high_bytes << "'" << endl;
+    arquivo_saida << "- Low Bytes '0x" << hex << low_bytes << "'" << endl;
+    arquivo_saida.flags(f);
+    arquivo_saida << "- Long '" << ler_long(high_bytes, low_bytes) << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Function that retrieves the bytes stored in Constant_Long_Info as a string
- * @return long converted to a string 
- */
-string CONSTANT_long_info::get_content()
+string CONSTANT_long_info::get_conteudo()
 {
-    return to_string(calc_long(high_bytes, low_bytes));
+    return to_string(ler_long(high_bytes, low_bytes));
 }
 
-/**
- * @brief Construct a new Constant_Double_Info object
- * @param file the input .class file
- */
 CONSTANT_double_info::CONSTANT_double_info(ifstream &file) 
 {
-    high_bytes = read_bytes<u4>(file);
-    low_bytes = read_bytes<u4>(file);
+    high_bytes = ler_bytes_big_endian<u4>(file);
+    low_bytes = ler_bytes_big_endian<u4>(file);
 }
 
-/**
- * @brief Dump Constant_double specfic information to the markdown outfile
- */
-void CONSTANT_double_info::dump_to_file()
+void CONSTANT_double_info::exibir()
 {
-    ios_base::fmtflags f(outfile.flags());
-    outfile << "- High Bytes `0x" << hex << high_bytes << "`" << endl;
-    outfile << "- Low Bytes `0x" << hex << low_bytes << "`" << endl;
-    outfile.flags(f);
-    outfile << "- Double `" << calc_double(high_bytes, low_bytes) << "`" << endl;
-    outfile << endl;
+    ios_base::fmtflags f(arquivo_saida.flags());
+    arquivo_saida << "- High Bytes '0x" << hex << high_bytes << "'" << endl;
+    arquivo_saida << "- Low Bytes '0x" << hex << low_bytes << "'" << endl;
+    arquivo_saida.flags(f);
+    arquivo_saida << "- Double '" << ler_double(high_bytes, low_bytes) << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Function that retrieves the bytes stored in Constant_Double_Info as a string
- * @return double converted to a string 
- */
-string CONSTANT_double_info::get_content()
+string CONSTANT_double_info::get_conteudo()
 {
-    return to_string(calc_double(high_bytes, low_bytes));
+    return to_string(ler_double(high_bytes, low_bytes));
 }
 
-/**
- * @brief Construct a new Constant_Class_Info object
- * @param file the input .class file
- */
 CONSTANT_class_info::CONSTANT_class_info(ifstream &file) 
 {
-    name_idx = read_bytes<u2>(file);
+    name_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_class specfic information to the markdown outfile
- * @param constant_pool the class_file constant pool
- */
-void CONSTANT_class_info::dump_to_file(cp_info_vector &constant_pool)
+void CONSTANT_class_info::exibir(cp_info_vector &constant_pool)
 {
     auto class_name = *(to_cp_info(constant_pool[name_idx - 1])->_utf8);
-    outfile << "- Name Index `" << name_idx << "`" << endl;
-    outfile << "- Class Name `<" << get_utf8_content(class_name) << ">`";
-    outfile << endl << endl;
+    arquivo_saida << "- Name Index '" << name_idx << "'" << endl;
+    arquivo_saida << "- Class Name '<" << exibir_utf8(class_name) << ">'";
+    arquivo_saida << endl << endl;
 }
 
-/**
- * @brief Function that retrieves the name of the class stored in Constant_Class_Info as a string
- * @param constant_pool the class_file constant pool
- * @return the name of the class 
- */
-string CONSTANT_class_info::get_content(cp_info_vector &constant_pool)
+string CONSTANT_class_info::get_conteudo(cp_info_vector &constant_pool)
 {
     auto class_name = *(to_cp_info(constant_pool[name_idx - 1])->_utf8);
-    return get_utf8_content(class_name);
+    return exibir_utf8(class_name);
 }
 
-/**
- * @brief Construct a new Constant_String_Info object
- * @param file the input .class file
- */
 CONSTANT_string_info::CONSTANT_string_info(ifstream &file) 
 {
-    str_idx = read_bytes<u2>(file);
+    str_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_string specfic information to the markdown outfile
- * @param constant_pool the class_file constant pool
- */
-void CONSTANT_string_info::dump_to_file(cp_info_vector &constant_pool)
+void CONSTANT_string_info::exibir(cp_info_vector &constant_pool)
 {
     auto str = *(to_cp_info(constant_pool[str_idx - 1])->_utf8);
-    outfile << "- String Index `" << str_idx << "`" << endl;
-    outfile << "- String `<" << get_utf8_content(str) << ">`";
-    outfile << endl << endl;
+    arquivo_saida << "- String Index '" << str_idx << "'" << endl;
+    arquivo_saida << "- String '<" << exibir_utf8(str) << ">'";
+    arquivo_saida << endl << endl;
 }
 
-/**
- * @brief Function that retrieves the string stored in Constant_String_Info
- * @param constant_pool the class_file constant pool
- * @return the string stored
- */
-string CONSTANT_string_info::get_content(cp_info_vector &constant_pool)
+string CONSTANT_string_info::get_conteudo(cp_info_vector &constant_pool)
 {
     auto string_utf8 = *(to_cp_info(constant_pool[str_idx - 1])->_utf8);
-    return get_utf8_content(string_utf8);
+    return exibir_utf8(string_utf8);
 }
 
-/**
- * @brief Construct a new Constant_Fieldref_Info object
- * @param file the input .class file
- */
 CONSTANT_fieldref_info::CONSTANT_fieldref_info(ifstream &file) 
 {
-    class_idx = read_bytes<u2>(file);
-    name_and_type_idx = read_bytes<u2>(file);
+    class_idx = ler_bytes_big_endian<u2>(file);
+    name_and_type_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_fieldref specfic information to the markdown outfile
- * @param constant_pool the class_file constant pool
- */
-void CONSTANT_fieldref_info::dump_to_file(cp_info_vector &constant_pool)
+void CONSTANT_fieldref_info::exibir(cp_info_vector &constant_pool)
 {
     auto class_name_index = to_cp_info(constant_pool[class_idx - 1])->_class->name_idx;
     auto class_name = *(to_cp_info(constant_pool[class_name_index - 1])->_utf8);
-    outfile << "- Class Index `" << class_idx << "`" << endl;
-    outfile << "- Class Name `<" << get_utf8_content(class_name) << ">`" << endl;
+    arquivo_saida << "- Class Index '" << class_idx << "'" << endl;
+    arquivo_saida << "- Class Name '<" << exibir_utf8(class_name) << ">'" << endl;
     
     auto nt_name_idx = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->name_idx;
     auto nt_name = *(to_cp_info(constant_pool[nt_name_idx - 1])->_utf8);
     auto nt_descriptor_index = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->descriptor_idx;
     auto nt_descriptor = *(to_cp_info(constant_pool[nt_descriptor_index - 1])->_utf8);
-    outfile << "- Name And Type Index `" << name_and_type_idx << "`" << endl;
-    outfile << "- Name And Type `<" << get_utf8_content(nt_name) << ":" << get_utf8_content(nt_descriptor) << ">`";
-    outfile << endl << endl;
+    arquivo_saida << "- Name And Type Index '" << name_and_type_idx << "'" << endl;
+    arquivo_saida << "- Name And Type '<" << exibir_utf8(nt_name) << ":" << exibir_utf8(nt_descriptor) << ">'";
+    arquivo_saida << endl << endl;
 }
 
-/**
- * @brief Function that retrieves the name and descriptor stored in Constant_Fieldref_Info concatenated in a string
- * @param constant_pool the class_file constant pool
- * @return the formated string containing the name and descriptor
- */
-string CONSTANT_fieldref_info::get_content(cp_info_vector &constant_pool)
+string CONSTANT_fieldref_info::get_conteudo(cp_info_vector &constant_pool)
 {
     auto class_name_idx = to_cp_info(constant_pool[class_idx - 1])->_class->name_idx;
     auto class_name = *(to_cp_info(constant_pool[class_name_idx - 1])->_utf8);
@@ -444,35 +331,23 @@ string CONSTANT_fieldref_info::get_content(cp_info_vector &constant_pool)
     auto descriptor_idx = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->descriptor_idx;
     auto method_name = *(to_cp_info(constant_pool[name_idx - 1])->_utf8);
     auto method_descriptor = *(to_cp_info(constant_pool[descriptor_idx - 1])->_utf8);
-    return (get_utf8_content(class_name) + "." + get_utf8_content(method_name) + " : " + get_utf8_content(method_descriptor));
+    return (exibir_utf8(class_name) + "." + exibir_utf8(method_name) + " : " + exibir_utf8(method_descriptor));
 }
 
-/**
- * @brief Construct a new Constant_Methodref_Info object
- * @param file the input .class file
- */
 CONSTANT_methodref_info::CONSTANT_methodref_info(ifstream &file) 
 {
-    class_idx = read_bytes<u2>(file);
-    name_and_type_idx = read_bytes<u2>(file);
+    class_idx = ler_bytes_big_endian<u2>(file);
+    name_and_type_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_methodref specfic information to the markdown outfile
- */
-void CONSTANT_methodref_info::dump_to_file()
+void CONSTANT_methodref_info::exibir()
 {
-    outfile << "- Class Index `" << class_idx << "`" << endl;
-    outfile << "- Name And Type Index `" << name_and_type_idx << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Class Index '" << class_idx << "'" << endl;
+    arquivo_saida << "- Name And Type Index '" << name_and_type_idx << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Function that retrieves the name and descriptor stored in Constant_Methodref_Info concatenated in a string
- * @param constant_pool the class_file constant pool
- * @return the formated string containing the name and descriptor
- */
-string CONSTANT_methodref_info::get_content(cp_info_vector &constant_pool)
+string CONSTANT_methodref_info::get_conteudo(cp_info_vector &constant_pool)
 {
     auto class_name_idx = to_cp_info(constant_pool[class_idx - 1])->_class->name_idx;
     auto class_name = *(to_cp_info(constant_pool[class_name_idx - 1])->_utf8);
@@ -480,158 +355,99 @@ string CONSTANT_methodref_info::get_content(cp_info_vector &constant_pool)
     auto descriptor_idx = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->descriptor_idx;
     auto method_name = *(to_cp_info(constant_pool[name_idx - 1])->_utf8);
     auto method_descriptor = *(to_cp_info(constant_pool[descriptor_idx - 1])->_utf8);
-    return (get_utf8_content(class_name) + "." + get_utf8_content(method_name) + " : " + get_utf8_content(method_descriptor));
+    return (exibir_utf8(class_name) + "." + exibir_utf8(method_name) + " : " + exibir_utf8(method_descriptor));
 }
 
-/**
- * @brief Retrieves the string representing the class name of the class_index stored in a instance of Constant_Methodref_Info
- * @param constant_pool the class_file constant pool
- * @return the name of the class 
- */
 string CONSTANT_methodref_info::get_class_name(cp_info_vector &constant_pool)
 {
     auto class_name_idx = to_cp_info(constant_pool[class_idx - 1])->_class->name_idx;
     auto class_name = *(to_cp_info(constant_pool[class_name_idx - 1])->_utf8);
-    return get_utf8_content(class_name);
+    return exibir_utf8(class_name);
 }
 
-/**
- * @brief Retrives the string representing the method name of name_index stored in a instance of Constant_Methodref_Info
- * @param constant_pool the class_file constant pool
- * @return the name of the method 
- */
 string CONSTANT_methodref_info::get_method_name(cp_info_vector &constant_pool)
 {
     auto name_idx = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->name_idx;
     auto method_name = *(to_cp_info(constant_pool[name_idx - 1])->_utf8);
-    return get_utf8_content(method_name);
+    return exibir_utf8(method_name);
 }
 
-/**
- * @brief Retrives the string representing the method descriptor of descriptor_index stored in a instance of Constant_Methodref_Info
- * @param constant_pool the class_file constant pool
- * @return the string representing the method descriptor
- */
 string CONSTANT_methodref_info::get_method_descriptor(cp_info_vector &constant_pool)
 {
     auto descriptor_idx = to_cp_info(constant_pool[name_and_type_idx - 1])->_name_and_type->descriptor_idx;
     auto method_descriptor = *(to_cp_info(constant_pool[descriptor_idx - 1])->_utf8);
-    return get_utf8_content(method_descriptor);
+    return exibir_utf8(method_descriptor);
 }
 
-/**
- * @brief Construct a new Constant_Interface_Methodref_Info object
- * @param file the input .class file
- */
 CONSTANT_interface_methodref_info::CONSTANT_interface_methodref_info(ifstream &file) 
 {
-    class_idx = read_bytes<u2>(file);
-    name_and_type_idx = read_bytes<u2>(file);
+    class_idx = ler_bytes_big_endian<u2>(file);
+    name_and_type_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_interface_methodref specfic information to the markdown outfile
- */
-void CONSTANT_interface_methodref_info::dump_to_file()
+void CONSTANT_interface_methodref_info::exibir()
 {
-    outfile << "- Class Index `" << class_idx << "`" << endl;
-    outfile << "- Name And Type Index `" << name_and_type_idx << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Class Index '" << class_idx << "'" << endl;
+    arquivo_saida << "- Name And Type Index '" << name_and_type_idx << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Construct a new Constant_Name_And_Type_Info object
- * @param file the input .class file
- */
 CONSTANT_name_and_type_info::CONSTANT_name_and_type_info(ifstream &file) 
 {
-    name_idx = read_bytes<u2>(file);
-    descriptor_idx = read_bytes<u2>(file);
+    name_idx = ler_bytes_big_endian<u2>(file);
+    descriptor_idx = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_name_and_type specfic information to the markdown outfile
- */
-void CONSTANT_name_and_type_info::dump_to_file()
+void CONSTANT_name_and_type_info::exibir()
 {
-    outfile << "- Name Index `" << name_idx << "`" << endl;
-    outfile << "- Descriptor Index `" << descriptor_idx << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Name Index '" << name_idx << "'" << endl;
+    arquivo_saida << "- Descriptor Index '" << descriptor_idx << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Retrieves the string representing the class name of the class_index stored in a instance of Constant_Name_And_Index_Info
- * @param constant_pool the class_file constant pool
- * @return the name of the class 
- */
 string CONSTANT_name_and_type_info::get_name(cp_info_vector &constant_pool)
 {
-    return get_utf8_content(*(to_cp_info(constant_pool[name_idx - 1])->_utf8));
+    return exibir_utf8(*(to_cp_info(constant_pool[name_idx - 1])->_utf8));
 }
 
-/**
- * @brief Retrives the string representing the method descriptor of descriptor_index stored in a instance of Constant_Name_And_Type_Info
- * @param constant_pool the class_file constant pool
- * @return the string representing the method descriptor
- */
 string CONSTANT_name_and_type_info::get_descriptor(cp_info_vector &constant_pool)
 {
-    return get_utf8_content(*(to_cp_info(constant_pool[descriptor_idx - 1])->_utf8));
+    return exibir_utf8(*(to_cp_info(constant_pool[descriptor_idx - 1])->_utf8));
 }
 
-/**
- * @brief Construct a new Constant_Method_Handle_Info object
- * @param file the input .class file
- */
+
 CONSTANT_method_handle_info::CONSTANT_method_handle_info(ifstream &file) 
 {
-    reference_kind = read_bytes<u1>(file);
-    reference_index = read_bytes<u2>(file);
+    reference_kind = ler_bytes_big_endian<u1>(file);
+    reference_index = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_method_handle specfic information to the markdown outfile
- */
-void CONSTANT_method_handle_info::dump_to_file()
+void CONSTANT_method_handle_info::exibir()
 {
-    outfile << "- Reference Kind `" << reference_kind << "`" << endl;
-    outfile << "- Reference Index `" << reference_index << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Reference Kind '" << reference_kind << "'" << endl;
+    arquivo_saida << "- Reference Index '" << reference_index << "'" << endl;
+    arquivo_saida << endl;
 }
 
-/**
- * @brief Construct a new Constant_Method_Type_Info object
- * @param file the input .class file
- */
 CONSTANT_method_type_info::CONSTANT_method_type_info(ifstream &file) 
 {
-    descriptor_index = read_bytes<u2>(file);
+    descriptor_index = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_method_type specfic information to the markdown outfile
- */
-void CONSTANT_method_type_info::dump_to_file()
+void CONSTANT_method_type_info::exibir()
 {
-    outfile << "- Descriptor Index `" << descriptor_index << "`" << endl;
+    arquivo_saida << "- Descriptor Index '" << descriptor_index << "'" << endl;
 }
 
-/**
- * @brief Construct a new Constant_Invoke_Dynamic_Info object
- * @param file the input .class file
- */
 CONSTANT_invoke_dynamic_info::CONSTANT_invoke_dynamic_info(ifstream &file) 
 {
-    bootstrap_method_attr_index = read_bytes<u2>(file);
-    name_and_type_index = read_bytes<u2>(file);
+    bootstrap_method_attr_index = ler_bytes_big_endian<u2>(file);
+    name_and_type_index = ler_bytes_big_endian<u2>(file);
 }
 
-/**
- * @brief Dump Constant_invoke_dynamic specfic information to the markdown outfile
- */
-void CONSTANT_invoke_dynamic_info::dump_to_file()
+void CONSTANT_invoke_dynamic_info::exibir()
 {
-    outfile << "- Bootstrap Method Attribute Index `" << bootstrap_method_attr_index << "`" << endl;
-    outfile << "- Name and Type Index `" << name_and_type_index << "`" << endl;
-    outfile << endl;
+    arquivo_saida << "- Bootstrap Method Attribute Index '" << bootstrap_method_attr_index << "'" << endl;
+    arquivo_saida << "- Name and Type Index '" << name_and_type_index << "'" << endl;
+    arquivo_saida << endl;
 }

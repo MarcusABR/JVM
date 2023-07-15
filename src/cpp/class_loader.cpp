@@ -1,6 +1,6 @@
-#include "../include/class_loader.hpp"
-#include "../include/class_file.hpp"
-#include "../include/utils.hpp"
+#include "../hpp/class_loader.hpp"
+#include "../hpp/class_file.hpp"
+#include "../hpp/utils.hpp"
 
 
 class_file* ClassLoader::carregar(string &filename)
