@@ -82,30 +82,30 @@ int main(int argc, char *argv[]) {
         string projectPath = getProjectPath(argv[2]);
         string className = getClassName(argv[2]);
         ClassLoader classLoader(getProjectPath(argv[2]));
-        MethodArea methodArea;
+        // MethodArea methodArea;
 
-        classLoader.setMethodArea(&methodArea);
+        // classLoader.setMethodArea(&methodArea);
         classFile = classLoader.loadClassFile(className);
 
         string option = argv[1];
-        InstructionSet instructionSet(&classLoader);
+        // InstructionSet instructionSet(&classLoader); 
 
         if (option.compare("-e") == 0) {
-            ClassPrinter classPrinter(classFile, &instructionSet);
+            ClassPrinter classPrinter(classFile, &instructionSet); //Trocar pelo antigo
             classPrinter.print();
         }
-        else if (option.compare("-i") == 0) {
-            string projectPath = getProjectPath(argv[2]);
+        // else if (option.compare("-i") == 0) {
+        //     string projectPath = getProjectPath(argv[2]);
 
-            classLoader.loadSuperClasses(&classFile);
+        //     classLoader.loadSuperClasses(&classFile);
 
-            //Inicio da execucao do programa
-            ExecutionEngine executionEngine(&classFile, &methodArea, &instructionSet);
-            executionEngine.execute();
-        }
-        else {
-            cout << "O segundo argumento deve ser -e para exibidor ou -i para interpredaor" << endl;
-        }
+        //     //Inicio da execucao do programa
+        //     ExecutionEngine executionEngine(&classFile, &methodArea, &instructionSet);
+        //     executionEngine.execute();
+        // }
+        // else {
+        //     cout << "O segundo argumento deve ser -e para exibidor ou -i para interpredaor" << endl;
+        // }
     }
     return 0;
 }
