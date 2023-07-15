@@ -20,6 +20,8 @@
 #include "../hpp/ClassPrinter.hpp"
 #include "../hpp/ExecutionEngine.hpp"
 
+#include "../hpp/libraries.hpp"
+
 using namespace std;
 
 /**
@@ -78,21 +80,28 @@ int main(int argc, char *argv[]) {
         cout << "Numero incorreto de argumentos especificado" << endl;
     }
     else {
-        ClassFile classFile;
-        string projectPath = getProjectPath(argv[2]);
-        string className = getClassName(argv[2]);
-        ClassLoader classLoader(getProjectPath(argv[2]));
+        // ClassFile classFile;
+        // string projectPath = getProjectPath(argv[2]);
+        // string className = getClassName(argv[2]);
+        // ClassLoader classLoader(getProjectPath(argv[2]));
         // MethodArea methodArea;
 
         // classLoader.setMethodArea(&methodArea);
-        classFile = classLoader.loadClassFile(className);
+        // classFile = classLoader.loadClassFile(className);
 
         string option = argv[1];
         // InstructionSet instructionSet(&classLoader); 
 
         if (option.compare("-e") == 0) {
-            ClassPrinter classPrinter(classFile, &instructionSet); //Trocar pelo antigo
-            classPrinter.print();
+            // ClassPrinter classPrinter(classFile, &instructionSet); //Trocar pelo antigo
+            auto nome_arquivo = static_cast<string>(argv[argc - 1]);
+    
+            ClassLoader loader;
+            class_file *arquivo_de_entrada = loader.carregar(nome_arquivo);
+
+            ler_exibir_arquivo(*arquivo_de_entrada, nome_arquivo);
+
+            delete arquivo_de_entrada;
         }
         // else if (option.compare("-i") == 0) {
         //     string projectPath = getProjectPath(argv[2]);

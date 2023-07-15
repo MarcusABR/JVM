@@ -35,9 +35,9 @@ Para rodar o programa no mode interpretador, basta usar o comando de acordo com 
 ## Exibidor
 Para rodar o programa no modo leitor, basta usar o mesmo comando do interpretador, com a flag `-r`:
 
-- Linux: ```$ ./jvm -r ./examples/<nome_da_classe>.class```
+- Linux: ```$ ./jvm -e ./examples/<nome_da_classe>.class```
 
-- Windows: ```$ ./jvm.exe -r ./examples/<nome_da_classe>.class```
+- Windows: ```$ ./jvm.exe -e ./examples/<nome_da_classe>.class```
 
 Um arquivo do tipo markdown (`.md`) será gerado com as informações do `.class` fornecido. Os arquivos gerados podem ser encontrados na pasta `/out/`.
 
