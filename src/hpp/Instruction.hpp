@@ -38,10 +38,10 @@ public:
     string getMnemonic();
     uint32_t getBytesCount();
 
-    static map<string, JavaType>* initializeFields(ClassFile*);
+    static map<string, JavaType>* initializeFields(class_file*);
     static vector<JavaType>* buildMultiAnewArray(vector<int>, int, char);
-    static ClassFile* resolveClass(string);
-    static FieldInfo* resolveField(ClassFile*, string, string);
+    static class_file* resolveClass(string);
+    static FieldInfo* resolveField(class_file*, string, string);
 
 
 

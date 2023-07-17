@@ -15,7 +15,7 @@
  *  @brief Construtor
  *  @param classFile do tipo ClassFile @param methodArea do tipo MethodArea @param instructionSet InstructionSet
  */
-ExecutionEngine::ExecutionEngine(ClassFile* classFile, MethodArea* methodArea, InstructionSet* instructionSet) {
+ExecutionEngine::ExecutionEngine(class_file* classFile, MethodArea* methodArea, InstructionSet* instructionSet) {
     vector<CPInfo*>constantPool = classFile->getConstantPool();
     string name = constantPool[classFile->getThisClass()-1]->getInfo(constantPool).first;
 
@@ -29,7 +29,7 @@ ExecutionEngine::ExecutionEngine(ClassFile* classFile, MethodArea* methodArea, I
  *  @brief Método com o objetivo de encontrar a função main, já que é por ela que começa a execução do interpretador
  */
 void ExecutionEngine::findMainMethod() {
-    ClassFile* mainClassFile = methodArea->getClassFile(mainClassFileName);
+    class_file* mainClassFile = methodArea->getClassFile(mainClassFileName);
     vector<CPInfo*> constantPool = mainClassFile->getConstantPool();
     vector<MethodInfo*> methods = mainClassFile->getMethods();
     int i;
@@ -58,7 +58,7 @@ void ExecutionEngine::findMainMethod() {
  */
 
 void ExecutionEngine::execute() {
-    ClassFile* mainClassFile = methodArea->getClassFile(mainClassFileName);
+    class_file* mainClassFile = methodArea->getClassFile(mainClassFileName);
     vector<CPInfo*> constantPool = mainClassFile->getConstantPool();
     JavaVirtualMachineThread jvmThread;
     Frame mainFrame(constantPool, this->mainMethod, jvmThread.getJVMStack());

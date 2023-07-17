@@ -1,35 +1,15 @@
-/**
- * @file main.cpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Arquivo principal, o qual contém a execução da JVM
- * @details O arquivo a seguir contém a implementação da seleção de execução pelo usuário entre leitor/exibidor ou interpretador
- * @see ClassFile.hpp
- * @see ClassLoader.hpp
- * @see ClassPrinter.hpp
- * @see ExecutionEngine.hpp
- */
 
 #include <iostream>
 #include <fstream>
 #include "../hpp/ClassFile.hpp"
 #include "../hpp/ClassLoader.hpp"
-#include "../hpp/ClassPrinter.hpp"
-#include "../hpp/ExecutionEngine.hpp"
+// #include "../hpp/ClassPrinter.hpp"
+// #include "../hpp/ExecutionEngine.hpp"
 
 #include "../hpp/libraries.hpp"
 
 using namespace std;
 
-/**
- * @brief Função utilizada para retornar o caminho do arquivo .class
- * 
- * @param commandLinePath 
- * @return string com o caminho para o arquivo
- */
 string getProjectPath(string commandLinePath) {
     int i = commandLinePath.size()-1;
 
@@ -46,12 +26,6 @@ string getProjectPath(string commandLinePath) {
     return commandLinePath.substr(0, i+1);
 }
 
-/**
- * @brief Separa o nome do arquivo .class dado o caminho para o arquivo
- * 
- * @param commandLinePath 
- * @return string com o nome do .class
- */
 string getClassName(string commandLinePath) {
     int i = commandLinePath.size()-1;
 
@@ -68,13 +42,6 @@ string getClassName(string commandLinePath) {
     return commandLinePath.substr(i+1, commandLinePath.size());
 }
 
-/**
- * @brief Função main da JVM
- * @details Permite a seleção de execução pelo usuário entre leitor/exibidor ou interpretador
- * @param argc 
- * @param argv 
- * @return int 
- */
 int main(int argc, char *argv[]) {
     if (argc != 3)  {
         cout << "Numero incorreto de argumentos especificado" << endl;

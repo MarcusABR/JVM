@@ -18,7 +18,6 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include "ByteReader.hpp"
 #include "CPInfo.hpp"
 
 using namespace std;

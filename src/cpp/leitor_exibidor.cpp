@@ -30,7 +30,7 @@ void ler_exibir_arquivo(class_file &class_f, string caminho_arquivo)
 
     arquivo_saida << "CLASSE: " << nome_arquivo << "" << endl << endl;
     exibir_informacoes_gerais(class_f);
-    exibir_constant_pool(class_f.constant_pool);
+    exibir_constant_pool(class_f.getConstantPool());
     exibir_interfaces(class_f);
     exibir_campos(class_f);
     exibir_metodos(class_f);
@@ -45,34 +45,34 @@ void exibir_informacoes_gerais(class_file &class_f)
 {
     arquivo_saida << "----------Informações Gerais----------" << endl;
     ios_base::fmtflags f(arquivo_saida.flags());
-    arquivo_saida << "Magic " << "'0x" << uppercase << hex << class_f.magic << "'  " << endl;
+    arquivo_saida << "Magic " << "'0x" << uppercase << hex << class_f.getMagic() << "'  " << endl;
     arquivo_saida.flags(f);
     
-    arquivo_saida << "Minor version '" << class_f.minor_version << "'  " << endl;
-    arquivo_saida << "Major version '" << class_f.major_version << "'";
-    arquivo_saida << "['" << get_versao(class_f.major_version, class_f.minor_version) << "']  " << endl;
+    arquivo_saida << "Minor version '" << class_f.getMinorVersion() << "'  " << endl;
+    arquivo_saida << "Major version '" << class_f.getMajorVersion() << "'";
+    arquivo_saida << "['" << get_versao(class_f.getMajorVersion(), class_f.getMinorVersion()) << "']  " << endl;
     
-    arquivo_saida << "Constant Pool Count '" << class_f.constant_pool_count << "'  " << endl;
+    arquivo_saida << "Constant Pool Count '" << class_f.getConstantPoolCount() << "'  " << endl;
     
     ios_base::fmtflags g(arquivo_saida.flags());
-    arquivo_saida << "Access Flags '0x" << setw(4) << setfill('0') << hex << class_f.access_flag << "'";
-    arquivo_saida << " ['" << ler_flags_acesso(class_f.access_flag, CLASS) << "']  " << endl;
+    arquivo_saida << "Access Flags '0x" << setw(4) << setfill('0') << hex << class_f.getAccessFlags() << "'";
+    arquivo_saida << " ['" << ler_flags_acesso(class_f.getAccessFlags(), CLASS) << "']  " << endl;
     arquivo_saida.flags(g);
     
-    auto this_class = to_cp_info(class_f.constant_pool[class_f.this_class - 1])->_class->name_idx;
-    auto this_class_name = *(to_cp_info(class_f.constant_pool[this_class - 1])->_utf8);
-    arquivo_saida << "This Class '" << class_f.this_class << "' ";
+    auto this_class = to_cp_info(class_f.getConstantPool()[class_f.getThisClass() - 1])->_class->name_idx;
+    auto this_class_name = *(to_cp_info(class_f.getConstantPool()[this_class - 1])->_utf8);
+    arquivo_saida << "This Class '" << class_f.getThisClass() << "' ";
     arquivo_saida << "'<" << exibir_utf8(this_class_name)  << ">'  " << endl;
     
-    auto super_class = to_cp_info(class_f.constant_pool[class_f.super_class - 1])->_class->name_idx;
-    auto super_class_name = *(to_cp_info(class_f.constant_pool[super_class - 1])->_utf8);
-    arquivo_saida << "Super Class '" << class_f.super_class << "' ";
+    auto super_class = to_cp_info(class_f.getConstantPool()[class_f.getSuperClass() - 1])->_class->name_idx;
+    auto super_class_name = *(to_cp_info(class_f.getConstantPool()[super_class - 1])->_utf8);
+    arquivo_saida << "Super Class '" << class_f.getSuperClass() << "' ";
     arquivo_saida << "'<" << exibir_utf8(super_class_name) << ">'  " << endl;
 
-    arquivo_saida << "Interfaces Count '" << class_f.interfaces_count << "'  " << endl;
-    arquivo_saida << "Fields Count '" << class_f.fields_count << "'  " << endl;
-    arquivo_saida << "Methods Count '" << class_f.methods_count << "'  " << endl;
-    arquivo_saida << "Attributes Count '" << class_f.attributes_count << "'" << endl;
+    arquivo_saida << "Interfaces Count '" << class_f.getInterfacesCount() << "'  " << endl;
+    arquivo_saida << "Fields Count '" << class_f.getFieldsCount() << "'  " << endl;
+    arquivo_saida << "Methods Count '" << class_f.getMethodsCount() << "'  " << endl;
+    arquivo_saida << "Attributes Count '" << class_f.getAttributesCount() << "'" << endl;
     arquivo_saida << endl;
 }
 
@@ -111,10 +111,10 @@ void exibir_interfaces(class_file &class_f)
     arquivo_saida << "----------Interfaces----------" << endl << endl;
     arquivo_saida << "________________________________________________________________" <<endl << endl;
 
-    for (auto interface : class_f.interfaces)
+    for (auto interface : class_f.getInterfaces() )
     {
-        auto interface_name_index = to_cp_info(class_f.constant_pool[interface - 1])->_class->name_idx;
-        auto interface_name = *(to_cp_info(class_f.constant_pool[interface_name_index - 1])->_utf8);
+        auto interface_name_index = to_cp_info(class_f.getConstantPool()[interface - 1])->_class->name_idx;
+        auto interface_name = *(to_cp_info(class_f.getConstantPool()[interface_name_index - 1])->_utf8);
         arquivo_saida << "- Interface: '" << interface << "' ";
         arquivo_saida << "'<" << exibir_utf8(interface_name) << ">'" << endl;
     }
@@ -127,10 +127,10 @@ void exibir_campos(class_file &class_f)
     arquivo_saida << "----------Fields----------" << endl << endl;
     arquivo_saida << endl << endl;
 
-    for (auto field : class_f.fields) 
+    for (auto field : class_f.getFields() ) 
     {
-        auto field_name = *(to_cp_info(class_f.constant_pool[field.name_idx - 1])->_utf8);
-        auto field_descriptor = *(to_cp_info(class_f.constant_pool[field.descriptor_idx - 1])->_utf8);
+        auto field_name = *(to_cp_info(class_f.getConstantPool()[field.name_idx - 1])->_utf8);
+        auto field_descriptor = *(to_cp_info(class_f.getConstantPool()[field.descriptor_idx - 1])->_utf8);
 
         arquivo_saida << "--> [" << field_counter++ << "] '" << exibir_utf8(field_name) << "'" << endl;
 
@@ -146,7 +146,7 @@ void exibir_campos(class_file &class_f)
         arquivo_saida << "- Attribute Count '" << field.attr_count << "'" << endl;
         
         arquivo_saida << "<details><summary>Show attributes</summary>" << endl << endl;
-        exibir_vetor_atributos(field.attr, class_f.constant_pool);
+        exibir_vetor_atributos(field.attr, class_f.getConstantPool());
         arquivo_saida << "________________________________________________________________" << endl << endl;
     }
     arquivo_saida <<  "________________________________________________________________"<<endl << endl;
@@ -159,10 +159,10 @@ void exibir_metodos(class_file &class_f)
     arquivo_saida << "----------Methods----------" << endl;
     arquivo_saida << endl << endl;
 
-    for (auto method : class_f.methods) 
+    for (auto method : class_f.getMethods()) 
     {
-        auto method_name = *(to_cp_info(class_f.constant_pool[method.name_idx - 1])->_utf8);
-        auto method_descriptor = *(to_cp_info(class_f.constant_pool[method.descriptor_idx - 1])->_utf8);
+        auto method_name = *(to_cp_info(class_f.getConstantPool()[method.name_idx - 1])->_utf8);
+        auto method_descriptor = *(to_cp_info(class_f.getConstantPool()[method.descriptor_idx - 1])->_utf8);
 
         arquivo_saida << "--> [" << method_counter++ << "] '" << exibir_utf8(method_name) << "' " << endl;
 
@@ -178,17 +178,18 @@ void exibir_metodos(class_file &class_f)
         arquivo_saida << "- Attribute Count '" << method.attr_count << "'" << endl;
         
         arquivo_saida << endl << endl;
-        exibir_vetor_atributos(method.attr, class_f.constant_pool);
+        exibir_vetor_atributos(method.attr, class_f.getConstantPool());
     }
     arquivo_saida << "________________________________________________________________" << endl << endl;
 }
 
 
-void exibir_atributos_de_classe(class_file &class_f)
+void exibir_atributos_de_classe(class_file &class_fp)
 {
+    class_file &class_f = class_fp;
     arquivo_saida << "----------Attributes----------" << endl;
     arquivo_saida << "________________________________________________________________" << endl << endl;
-    exibir_vetor_atributos(class_f.attributes, class_f.constant_pool);
+    exibir_vetor_atributos(class_f.getAttributes(), class_f.getConstantPool());
     arquivo_saida << "________________________________________________________________"<< endl << endl;
 }
 

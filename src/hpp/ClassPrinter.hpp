@@ -36,7 +36,7 @@ using namespace std;
 */
 class ClassPrinter {
 private:
-    ClassFile classFile;
+    class_file classFile;
     InstructionSet * instructionSet;
     string interpretClassFlags(uint16_t);
     string interpretMethodFlags(uint16_t);
@@ -59,7 +59,7 @@ private:
     void printInnerClassesInfo(InnerClassesAttribute*);
 
 public:
-    ClassPrinter(ClassFile classFile, InstructionSet * instructionSet);
+    ClassPrinter(class_file classFile, InstructionSet * instructionSet);
     void print();
     //nao mudei o nome da funcao de baixo, dps nois ve como fica
     string Flag_names(int flag_byte, int parametro);

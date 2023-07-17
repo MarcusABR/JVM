@@ -75,7 +75,7 @@ uint32_t Instruction::getBytesCount() {
  *  @param currentClass do tipo ClassFile*, fieldName do tipo string e fieldDescriptor do tipo string
  *  @return retorna um FieldInfo*
  */
-FieldInfo* Instruction::resolveField(ClassFile* currentClass, string fieldName, string fieldDescriptor) {
+FieldInfo* Instruction::resolveField(class_file* currentClass, string fieldName, string fieldDescriptor) {
     vector<CPInfo*> constantPool = currentClass->getConstantPool();
     MethodArea * methodArea = classLoader->getMethodArea();
     FieldInfo* returnField;
@@ -98,7 +98,7 @@ FieldInfo* Instruction::resolveField(ClassFile* currentClass, string fieldName, 
     for (uint16_t i = 0; i < currentClass->getInterfacesCount(); i++) {
         CPInfo * classInfo = constantPool[interfaces[i]->getInterfaceIndex()-1];
         string interfaceName = classInfo->getInfo(constantPool).first;
-        ClassFile * interfaceClass = methodArea->getClassFile(interfaceName);
+        class_file * interfaceClass = methodArea->getClassFile(interfaceName);
 
         returnField = resolveField(interfaceClass, fieldName, fieldDescriptor);
         if (returnField->nameIndex != 0) {
@@ -108,7 +108,7 @@ FieldInfo* Instruction::resolveField(ClassFile* currentClass, string fieldName, 
 
     CPInfo* superClassInfo = constantPool[currentClass->getSuperClass()-1];
     string superClassName = superClassInfo->getInfo(constantPool).first;
-    ClassFile * superClass = methodArea->getClassFile(superClassName);
+    class_file * superClass = methodArea->getClassFile(superClassName);
     returnField = resolveField(superClass, fieldName, fieldDescriptor);
     if (returnField->nameIndex != 0) {
         return returnField;
@@ -3543,9 +3543,9 @@ uint32_t Instruction::getstaticFunction(Frame* frame) {
         if (!methodArea->isClassInitialized(className)) {
             methodArea->setClassAsInitialized(className);
 
-            ClassFile aux = classLoader->loadClassFile(className + ".class");
+            class_file aux = classLoader->loadClassFile(className + ".class");
             classLoader->loadSuperClasses(&aux);
-            ClassFile * classFile = classLoader->getClassFromMethodArea(className);
+            class_file * classFile = classLoader->getClassFromMethodArea(className);
             vector<CPInfo*> constantPool = classFile->getConstantPool();
             vector<MethodInfo*> methods = classFile->getMethods();
             MethodInfo* method;
@@ -3570,7 +3570,7 @@ uint32_t Instruction::getstaticFunction(Frame* frame) {
             }
         }
 
-        ClassFile * classFile = methodArea->getClassFile(className);
+        class_file * classFile = methodArea->getClassFile(className);
         vector<CPInfo*> constantPool = classFile->getConstantPool();
         vector<FieldInfo*> fields = classFile->getFields();
         FieldInfo* field;
@@ -3647,9 +3647,9 @@ uint32_t Instruction::putstaticFunction(Frame* frame) {
     if (!methodArea->isClassInitialized(className)) {
         methodArea->setClassAsInitialized(className);
 
-        ClassFile aux = classLoader->loadClassFile(className + ".class");
+        class_file aux = classLoader->loadClassFile(className + ".class");
         classLoader->loadSuperClasses(&aux);
-        ClassFile * classFile = classLoader->getClassFromMethodArea(className);
+        class_file * classFile = classLoader->getClassFromMethodArea(className);
         vector<CPInfo*> constantPool = classFile->getConstantPool();
         vector<MethodInfo*> methods = classFile->getMethods();
         MethodInfo* method;
@@ -3674,7 +3674,7 @@ uint32_t Instruction::putstaticFunction(Frame* frame) {
         }
     }
 
-    ClassFile * classFile = methodArea->getClassFile(className);
+    class_file * classFile = methodArea->getClassFile(className);
     vector<CPInfo*> constantPool = classFile->getConstantPool();
     vector<FieldInfo*> fields = classFile->getFields();
     FieldInfo* field;
@@ -4078,7 +4078,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
         frame->operandStack.pop();
         map<string, JavaType>* object = (map<string, JavaType>*)objectref.type_reference;
         string * objectClassName = (string*)object->at("<this_class>").type_reference;
-        ClassFile * objectClassFile = methodArea->getClassFile(*objectClassName);
+        class_file * objectClassFile = methodArea->getClassFile(*objectClassName);
 
         constantPool = objectClassFile->getConstantPool();
         vector<MethodInfo*> methods = objectClassFile->getMethods();
@@ -4097,7 +4097,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
         //Caso nao encontre checa as superclasses
         if (!foundMethod) {
             do {
-                ClassFile * classFile = methodArea->getClassFile(className);
+                class_file * classFile = methodArea->getClassFile(className);
                 constantPool = classFile->getConstantPool();
                 vector<MethodInfo*> methods = classFile->getMethods();
 
@@ -4223,7 +4223,7 @@ uint32_t Instruction::invokespecialFunction(Frame* frame) {
     vector<CPInfo*> constantPool;
     MethodInfo* method;
     do {
-        ClassFile * classFile = methodArea->getClassFile(className);
+        class_file * classFile = methodArea->getClassFile(className);
         constantPool = classFile->getConstantPool();
         vector<MethodInfo*> methods = classFile->getMethods();
 
@@ -4354,9 +4354,9 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
     if (!methodArea->isClassInitialized(className)) {
         methodArea->setClassAsInitialized(className);
 
-        ClassFile aux = classLoader->loadClassFile(className + ".class");
+        class_file aux = classLoader->loadClassFile(className + ".class");
         classLoader->loadSuperClasses(&aux);
-        ClassFile * classFile = classLoader->getClassFromMethodArea(className);
+        class_file * classFile = classLoader->getClassFromMethodArea(className);
         vector<CPInfo*> constantPool = classFile->getConstantPool();
         vector<MethodInfo*> methods = classFile->getMethods();
         MethodInfo* method;
@@ -4381,7 +4381,7 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
         }
     }
 
-    ClassFile * classFile = methodArea->getClassFile(className);
+    class_file * classFile = methodArea->getClassFile(className);
     vector<CPInfo*> constantPool = classFile->getConstantPool();
     vector<MethodInfo*> methods = classFile->getMethods();
     MethodInfo* method;
@@ -4535,9 +4535,9 @@ uint32_t Instruction::newOpFunction(Frame* frame) {
         if (!methodArea->isClassInitialized(className)) {
             methodArea->setClassAsInitialized(className);
 
-            ClassFile aux = classLoader->loadClassFile(className + ".class");
+            class_file aux = classLoader->loadClassFile(className + ".class");
             classLoader->loadSuperClasses(&aux);
-            ClassFile * classFile = classLoader->getClassFromMethodArea(className);
+            class_file * classFile = classLoader->getClassFromMethodArea(className);
             vector<CPInfo*> constantPool = classFile->getConstantPool();
             vector<MethodInfo*> methods = classFile->getMethods();
             MethodInfo* method;
@@ -4562,7 +4562,7 @@ uint32_t Instruction::newOpFunction(Frame* frame) {
             }
         }
 
-        ClassFile * classFile = methodArea->getClassFile(className);
+        class_file * classFile = methodArea->getClassFile(className);
         JavaType objectref;
         objectref.tag = CAT1;
         objectref.type_reference = (uint64_t)initializeFields(classFile);
@@ -4571,10 +4571,10 @@ uint32_t Instruction::newOpFunction(Frame* frame) {
     return ++frame->localPC;
 }
 
-map<string, JavaType>* Instruction::initializeFields(ClassFile* classFile) {
+map<string, JavaType>* Instruction::initializeFields(class_file* classFile) {
     MethodArea * methodArea = classLoader->getMethodArea();
     map<string, JavaType>* object = new map<string, JavaType>;
-    ClassFile * objectClass = classFile;
+    class_file * objectClass = classFile;
 
     do {
         vector<CPInfo*> constantPool = classFile->getConstantPool();

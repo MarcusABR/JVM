@@ -1,77 +1,68 @@
-/**
- * @file ClassLoader.cpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Arquivo de implementação das funções do Class Loader
- * @see ClassLoader.hpp
- */
-
-#include "../hpp/ClassLoader.hpp"
-
-/** @fn ClassLoader::ClassLoader
- *  @brief Construtor ClassLoader
- *  @param projectPath
- */
-ClassLoader::ClassLoader(string projectPath) {
-    this->projectPath = projectPath;
-}
 
 
-/** @class ClassLoader::loadClassFile
- *  @brief Método que visa carregar o arquivo .class
- *  @param className tipo string
- *  @return tipo ClassFile
- */
-ClassFile ClassLoader::loadClassFile(string className) {
-    FILE *fp;
+// #include "../hpp/ClassLoader.hpp"
 
-    if (className.compare("java/lang/Object") == 0) {
-        fp = fopen("java/lang/Object.class", "rb");
-    }
-    else {
-        fp = fopen((projectPath + className).c_str(), "rb");
-    }
+// /** @fn ClassLoader::ClassLoader
+//  *  @brief Construtor ClassLoader
+//  *  @param projectPath
+//  */
+// ClassLoader::ClassLoader(string projectPath) {
+//     this->projectPath = projectPath;
+// }
 
-    if (fp != NULL) {
-        ClassFile classFile(fp);
-        methodArea->insertClass(classFile);
-        fclose(fp);
-        return classFile;
-    }
-    cout << "Nao foi possivel abrir o arquivo! Programa terminado!" << projectPath << " " << className << endl;
-    exit(0);
-}
 
-/** @class ClassLoader::loadSuperClasses
- *  @brief Método que visa carregar as superClasses o arquivo .class
- *  @param classFile ponteiro do tipo ClassFile
- */
+// /** @class ClassLoader::loadClassFile
+//  *  @brief Método que visa carregar o arquivo .class
+//  *  @param className tipo string
+//  *  @return tipo ClassFile
+//  */
+// ClassFile ClassLoader::loadClassFile(string className) {
+//     FILE *fp;
 
-void ClassLoader::loadSuperClasses(ClassFile* classFile) {
-    vector<CPInfo*> constantPool = classFile->getConstantPool();
+//     if (className.compare("java/lang/Object") == 0) {
+//         fp = fopen("java/lang/Object.class", "rb");
+//     }
+//     else {
+//         fp = fopen((projectPath + className).c_str(), "rb");
+//     }
 
-    if (classFile->getSuperClass() == 0) {
-        return;
-    }
+//     if (fp != NULL) {
+//         ClassFile classFile(fp);
+//         methodArea->insertClass(classFile);
+//         fclose(fp);
+//         return classFile;
+//     }
+//     cout << "Nao foi possivel abrir o arquivo! Programa terminado!" << projectPath << " " << className << endl;
+//     exit(0);
+// }
 
-    string superClassPath = constantPool[classFile->getSuperClass()-1]->getInfo(constantPool).first.c_str();
+// /** @class ClassLoader::loadSuperClasses
+//  *  @brief Método que visa carregar as superClasses o arquivo .class
+//  *  @param classFile ponteiro do tipo ClassFile
+//  */
 
-    // if (superClassPath.compare("java/lang/string") == 0 ||
-    //     superClassPath.compare("java/lang/System.out") == 0 ||
-    //     superClassPath.compare("java/lang/System.in") == 0) {
-    //     return;
-    // }
+// void ClassLoader::loadSuperClasses(ClassFile* classFile) {
+//     vector<CPInfo*> constantPool = classFile->getConstantPool();
 
-    ClassFile superClassFile;
+//     if (classFile->getSuperClass() == 0) {
+//         return;
+//     }
 
-    if (superClassPath.compare("java/lang/Object") == 0) {
-        superClassFile = loadClassFile("java/lang/Object");
-    }
-    else {
-        superClassFile = loadClassFile(superClassPath+".class");
-        loadSuperClasses(&superClassFile);
-    }
-}
+//     string superClassPath = constantPool[classFile->getSuperClass()-1]->getInfo(constantPool).first.c_str();
+
+//     // if (superClassPath.compare("java/lang/string") == 0 ||
+//     //     superClassPath.compare("java/lang/System.out") == 0 ||
+//     //     superClassPath.compare("java/lang/System.in") == 0) {
+//     //     return;
+//     // }
+
+//     ClassFile superClassFile;
+
+//     if (superClassPath.compare("java/lang/Object") == 0) {
+//         superClassFile = loadClassFile("java/lang/Object");
+//     }
+//     else {
+//         superClassFile = loadClassFile(superClassPath+".class");
+//         loadSuperClasses(&superClassFile);
+//     }
+// }
