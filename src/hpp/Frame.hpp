@@ -55,8 +55,9 @@ private:
     //MethodInfo* method;
     method_info* method;
     // vector<method_info> method;
-    // CodeAttribute codeAttribute;
-    Code_attribute codeAttribute;
+    //CodeAttribute codeAttribute;
+    //Code_attribute codeAttribute;
+    Code_attribute* codeAttribute;
 public:
     //vector<CPInfo*> constantPool;
     cp_info_vector* constantPool;
@@ -68,10 +69,12 @@ public:
     //Frame(vector<CPInfo*>, MethodInfo*, stack<Frame>*);
     Frame(cp_info_vector, method_info*, stack<Frame>*);;
     uint8_t* getCode() {
-        return &(this->codeAttribute.code[0]);
+        //return &(this->codeAttribute.code[0]);
+        return &(this->codeAttribute->code[0]);
     }
     uint32_t getCodeLength() {
-        return this->codeAttribute.code_length;
+        //return this->codeAttribute.code_length;
+        return this->codeAttribute->code_length;
     }
 };
 

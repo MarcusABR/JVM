@@ -38,6 +38,7 @@ Frame::Frame(cp_info_vector constantPool, method_info* method, stack<Frame>* jvm
     if (foundCode) {
         Attribute_Info attribute = *to_attr_info(attributes[i]);
         uint16_t maxLocals = attribute.getCodeAttribute().max_locals;
+        //this->codeAttribute = attribute.getCodeAttribute();
         this->codeAttribute = &(attribute.getCodeAttribute());
         this->localVariables = vector<JavaType>(maxLocals);
         this->localPC = 0;
