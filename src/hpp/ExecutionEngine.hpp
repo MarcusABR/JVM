@@ -27,12 +27,16 @@ class ExecutionEngine {
 private:
     string mainClassFileName;
     InstructionSet * instructionSet;
-    MethodInfo* mainMethod;
+    //MethodInfo* mainMethod;
+    method_info* mainMethod;
     MethodArea* methodArea;
+    // ponteiro para aquivo de classe
+    class_file* classFile;
     void findMainMethod();
     void executeInstruction(uint8_t*, uint32_t, Frame*);
 public:
-    ExecutionEngine(ClassFile*, MethodArea*, InstructionSet*);
+    //ExecutionEngine(ClassFile*, MethodArea*, InstructionSet*);
+    ExecutionEngine(class_file*, InstructionSet*);
     void execute();
 };
 
