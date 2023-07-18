@@ -1,15 +1,7 @@
-/**
- * @file Instruction.cpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Implementação dos métodos de uma classe Instruction
- * @see Instruction.hpp
- */
-
+#include "../cpp/leitor_exibidor.cpp"
 #include "../hpp/Instruction.hpp"
+#include <iostream>
+#include <string.h>
 
 /** @class Instruction::setClassLoader
  *  @brief Seta o classLoader da classe como o classLoader lido e passado por parâmetro
@@ -112,21 +104,25 @@ field_info* Instruction::resolveField(class_file* currentClass, string fieldName
         //CPInfo * classInfo = constantPool[interfaces[i]->getInterfaceIndex()-1];
         // acho que a interface ja e o proprio index
         shared_ptr<CP_Info> classInfo = to_cp_info(constantPool[interfaces[i] - 1]);
-        string interfaceName = classInfo->getInfo(constantPool).first;
+        auto interfaceIdx = classInfo->_class->name_idx;
+        
+        string interfaceName = exibir_utf8(*(to_cp_info(constantPool[interfaceIdx-1])->_utf8));
         class_file * interfaceClass = methodArea->getClassFile(interfaceName);
 
         returnField = resolveField(interfaceClass, fieldName, fieldDescriptor);
-        if (returnField->nameIndex != 0) {
+        if (returnField->name_idx != 0) {
             return returnField;
         }
     }
 
     //CPInfo* superClassInfo = constantPool[currentClass->getSuperClass()-1];
-    shared_ptr<CP_Info> superClassInfo = to_cp_info(constantPool[currentClass->getSuperClass() - 1]);
-    string superClassName = superClassInfo->getInfo(constantPool).first;
+    auto superClassIdx = to_cp_info(constantPool[currentClass->getSuperClass() - 1])->_class->name_idx;
+    string superClassName = exibir_utf8(*(to_cp_info(constantPool[superClassIdx])->_utf8));
+
+
     class_file * superClass = methodArea->getClassFile(superClassName);
     returnField = resolveField(superClass, fieldName, fieldDescriptor);
-    if (returnField->nameIndex != 0) {
+    if (returnField->name_idx != 0) {
         return returnField;
     }
 
@@ -392,10 +388,12 @@ uint32_t Instruction::ldcFunction(Frame* frame) {
     uint8_t byte = bytecode[++frame->localPC];
     uint8_t index = byte;
     JavaType value;
+    //i
 
     //CPInfo * cpInfo = frame->constantPool[index-1];
-    CP_Info * cpInfo = frame->constantPool[index-1];
+    CP_Info * cpInfo = (frame->constantPool)[index-1];
     //switch(cpInfo->getTag()) {
+
     switch(cpInfo->tag) {
     // case CPInfo::CONSTANT_Class:
     //     break;
@@ -404,29 +402,31 @@ uint32_t Instruction::ldcFunction(Frame* frame) {
     // case CPInfo::CONSTANT_MethodHandle:
     //     break;
     //case CPInfo::CONSTANT_String:
-    case CP_Info::CONSTANT_String_info:
+    case CONSTANT_String:
         //value.type_reference = (uint64_t)new string(cpInfo->getInfo(frame->constantPool).second);
         value.type_reference = (uint64_t)new string(cpInfo->get_conteudo(frame->constantPool));
         value.tag = CAT1;
         frame->operandStack.push(value);
         break;
     //case CPInfo::CONSTANT_Integer:
-    case CP_Info::CONSTANT_Integer:
+    case CONSTANT_Integer:
         value.type_int = cpInfo->get_conteudo().bytes;
         value.tag = CAT1;
         frame->operandStack.push(value);
         break;
     //case CPInfo::CONSTANT_Float:
-    case CP_Info::CONSTANT_Float:
+    case CONSTANT_Float:
         value.type_float = cpInfo->getFloatInfo().bytes;
         value.tag = CAT1;
         frame->operandStack.push(value);
         break;
     default:
         printf("A funcao ldc encontrou um tipo indefinido: %d\n", cpInfo->getTag());
-        exit(0);
+        std::exit(0);
         break;
     }
+
+
     return ++frame->localPC;
 }
 
@@ -456,19 +456,19 @@ uint32_t Instruction::ldc2_wFunction(Frame* frame) {
 
     CPInfo * cpInfo = frame->constantPool[index-1];
     switch(cpInfo->getTag()) {
-    case CPInfo::CONSTANT_Long:
+    case CONSTANT_Long:
         value.type_long = ((uint64_t)cpInfo->getLongInfo().high_bytes << 32) | cpInfo->getLongInfo().low_bytes;
         value.tag = CAT2;
         frame->operandStack.push(value);
         break;
-    case CPInfo::CONSTANT_Double:
+    case CONSTANT_Double:
         value.type_double = ((uint64_t)cpInfo->getDoubleInfo().high_bytes << 32) | cpInfo->getDoubleInfo().low_bytes;
         value.tag = CAT2;
         frame->operandStack.push(value);
         break;
     default:
         printf("A funcao ldc2_w encontrou um tipo indefinido: %d\n", cpInfo->getTag());
-        exit(0);
+        std::exit(0);
         break;
     }
     return ++frame->localPC;
@@ -1517,7 +1517,7 @@ uint32_t Instruction::popFunction(Frame* frame) {
  */
 uint32_t Instruction::pop2Function(Frame* frame) {
     printf("Instrucao pop2Function nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -1542,7 +1542,7 @@ uint32_t Instruction::dupFunction(Frame* frame) {
  */
 uint32_t Instruction::dup_x1Function(Frame* frame) {
     printf("Instrucao dup_x1Function nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -1553,7 +1553,7 @@ uint32_t Instruction::dup_x1Function(Frame* frame) {
  */
 uint32_t Instruction::dup_x2Function(Frame* frame) {
     printf("Instrucao dup_x2Function nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -3281,7 +3281,7 @@ uint32_t Instruction::if_icmpleFunction(Frame* frame) {
  */
 uint32_t Instruction::if_acmpeqFunction(Frame* frame) {
     printf("Instrucao if_acmpeqFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -3292,7 +3292,7 @@ uint32_t Instruction::if_acmpeqFunction(Frame* frame) {
  */
 uint32_t Instruction::if_acmpneFunction(Frame* frame) {
     printf("Instrucao if_acmpneFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -3319,7 +3319,7 @@ uint32_t Instruction::gotoOpFunction(Frame* frame) {
  */
 uint32_t Instruction::jsrFunction(Frame* frame) {
     printf("Instrucao jsrFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -3330,7 +3330,7 @@ uint32_t Instruction::jsrFunction(Frame* frame) {
  */
 uint32_t Instruction::retFunction(Frame* frame) {
     printf("Instrucao retFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -3649,7 +3649,7 @@ uint32_t Instruction::getstaticFunction(Frame* frame) {
         }
         else {
             printf("getstatic: tipo do descritor nao reconhecido: %s\n", fieldDescriptor.c_str());
-            exit(0);
+            std::exit(0);
         }
     }
 
@@ -3922,7 +3922,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
                 }
                 else {
                     cout << "Erro no tipo booleano!\\n" << endl;
-                    exit(0);
+                    std::exit(0);
                 }
             }
             else if (descriptor.compare("()V") == 0) {
@@ -3930,7 +3930,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
             }
             else {
                 printf("invokevirtualFunction: tipo do descritor nao reconhecido: %s\n", descriptor.c_str());
-                exit(0);
+                std::exit(0);
             }
         }
         else if (methodName.compare("print") == 0) {
@@ -3973,7 +3973,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
                 }
                 else {
                     cout << "Erro no tipo booleano!";
-                    exit(0);
+                    std::exit(0);
                 }
             }
             else if (descriptor.compare("()V") == 0) {
@@ -3981,12 +3981,12 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
             }
             else {
                 printf("invokevirtualFunction: tipo do descritor nao reconhecido: %s\n", descriptor.c_str());
-                exit(0);
+                std::exit(0);
             }
         }
         else {
             printf("invokevirtualFunction: falta implementar\n");
-            exit(0);
+            std::exit(0);
         }
     }
     else if (className.compare("java/lang/StringBuilder") == 0) {
@@ -4067,14 +4067,14 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
                 }
                 else {
                     cout << "Erro no tipo booleano durante a concatenacao!";
-                    exit(0);
+                    std::exit(0);
                 }
                 frame->operandStack.push(objectref);
                 objectref.tag = CAT1;
             }
             else {
                 printf("invokevirtual: StringBuilder: descritor nao reconhecido: %s\n", descriptor.c_str());
-                exit(0);
+                std::exit(0);
             }
         }
         else if (methodName.compare("toString") == 0) {
@@ -4082,7 +4082,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
         }
         else {
             printf("invokevirtualFunction: Metodo do StringBuilder nao reconhecido: %s\n", methodName.c_str());
-            exit(0);
+            std::exit(0);
         }
     }
     else {
@@ -4109,7 +4109,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
             }
             else {
                 cout << "Tipo de descritor nao reconhecido na contagem: " << descriptor[i] << endl;
-                exit(0);
+                std::exit(0);
             }
             auxstack.push(frame->operandStack.top());
             frame->operandStack.pop();
@@ -4161,7 +4161,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
                 if (!foundMethod) {
                     if (classFile->getSuperClass() == 0) {
                         printf("invokevirutal:  metodo nao foi encontrado em nenhuma superclasse! Talvez esteja em uma interface, falta Implementar!\n");
-                        exit(0);
+                        std::exit(0);
                     }
                     className = constantPool[classFile->getSuperClass()-1]->getInfo(constantPool).first;
                 }
@@ -4211,7 +4211,7 @@ uint32_t Instruction::invokevirtualFunction(Frame* frame) {
             }
             else {
                 cout << "Tipo de descritor nao reconhecido: " << descriptor[i] << endl;
-                exit(0);
+                std::exit(0);
             }
         }
         staticMethodFrame.localVariables[0] = objectref;
@@ -4255,7 +4255,7 @@ uint32_t Instruction::invokespecialFunction(Frame* frame) {
         }
         else {
             printf("invokespecial: metodo da classe string desconhecido: %s\n", methodName.c_str());
-            exit(0);
+            std::exit(0);
         }
         return ++frame->localPC;
     }
@@ -4326,7 +4326,7 @@ uint32_t Instruction::invokespecialFunction(Frame* frame) {
         }
         else {
             cout << "Tipo de descritor nao reconhecido na contagem: " << descriptor[i] << endl;
-            exit(0);
+            std::exit(0);
         }
         auxstack.push(frame->operandStack.top());
         frame->operandStack.pop();
@@ -4371,7 +4371,7 @@ uint32_t Instruction::invokespecialFunction(Frame* frame) {
         }
         else {
             cout << "Tipo de descritor nao reconhecido: " << descriptor[i] << endl;
-            exit(0);
+            std::exit(0);
         }
     }
     JavaType objectref = frame->operandStack.top();
@@ -4463,7 +4463,7 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
 
     if (!foundMethod) {
         printf("Invokestatic: o método especificado nao foi encontrado!\n");
-        exit(0);
+        std::exit(0);
     }
 
     // Frame recebe class_file e jvm_stack
@@ -4493,7 +4493,7 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
         }
         else {
             cout << "Tipo de descritor nao reconhecido na contagem: " << descriptor[i] << endl;
-            exit(0);
+            std::exit(0);
         }
         auxstack.push(frame->operandStack.top());
         frame->operandStack.pop();
@@ -4538,7 +4538,7 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
         }
         else {
             cout << "Tipo de descritor nao reconhecido: " << descriptor[i] << endl;
-            exit(0);
+            std::exit(0);
         }
     }
 
@@ -4554,7 +4554,7 @@ uint32_t Instruction::invokestaticFunction(Frame* frame) {
  */
 uint32_t Instruction::invokeinterfaceFunction(Frame* frame) {
     printf("Instrucao invokeinterfaceFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4565,7 +4565,7 @@ uint32_t Instruction::invokeinterfaceFunction(Frame* frame) {
  */
 uint32_t Instruction::invokedynamicFunction(Frame* frame) {
     printf("Instrucao invokedynamicFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4695,7 +4695,7 @@ map<string, JavaType>* Instruction::initializeFields(class_file* classFile) {
             }
             else {
                 printf("Criacao de fields: tipo do descritor nao reconhecido: %s\n", fieldDescriptor.c_str());
-                exit(0);
+                std::exit(0);
             }
 
             object->insert(make_pair(fieldName, fieldContent));
@@ -4849,7 +4849,7 @@ uint32_t Instruction::arraylengthFunction(Frame* frame) {
  */
 uint32_t Instruction::athrowFunction(Frame* frame) {
     printf("Instrucao athrowFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4860,7 +4860,7 @@ uint32_t Instruction::athrowFunction(Frame* frame) {
  */
 uint32_t Instruction::checkcastFunction(Frame* frame) {
     printf("Instrucao checkcastFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4871,7 +4871,7 @@ uint32_t Instruction::checkcastFunction(Frame* frame) {
  */
 uint32_t Instruction::instanceofFunction(Frame* frame) {
     printf("Instrucao instanceofFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4882,7 +4882,7 @@ uint32_t Instruction::instanceofFunction(Frame* frame) {
  */
 uint32_t Instruction::monitorenterFunction(Frame* frame) {
     printf("Instrucao monitorenterFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4893,7 +4893,7 @@ uint32_t Instruction::monitorenterFunction(Frame* frame) {
  */
 uint32_t Instruction::monitorexitFunction(Frame* frame) {
     printf("Instrucao monitorexitFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4904,7 +4904,7 @@ uint32_t Instruction::monitorexitFunction(Frame* frame) {
  */
 uint32_t Instruction::wideFunction(Frame* frame) {
     printf("Instrucao wideFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -4923,7 +4923,7 @@ vector<JavaType>* Instruction::buildMultiAnewArray(vector<int> dimensions, int i
             }
             else {
                 cout << "Tipo de multianewaray desconhecido: " << type << endl;
-                exit(0);
+                std::exit(0);
             }
         }
         return array;
@@ -5024,7 +5024,7 @@ uint32_t Instruction::ifnonnullFunction(Frame* frame) {
  */
 uint32_t Instruction::goto_wFunction(Frame* frame) {
     printf("Instrucao goto_wFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }
 
@@ -5035,6 +5035,6 @@ uint32_t Instruction::goto_wFunction(Frame* frame) {
  */
 uint32_t Instruction::jsr_wFunction(Frame* frame) {
     printf("Instrucao jsr_wFunction nao implementada ainda!\n");
-    exit(0);
+    std::exit(0);
     return -1;
 }

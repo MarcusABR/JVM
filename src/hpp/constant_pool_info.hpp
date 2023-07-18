@@ -171,6 +171,7 @@ public:
 
     void exibir_info(cp_info_vector&, unsigned int&);
     string get_conteudo(cp_info_vector&);
+
 };
 
 #endif // _CONSTANT_POOL_INFO_HPP
