@@ -21,9 +21,10 @@
 #include <cstdint>
 #include <vector>
 #include <stack>
+// typedef cp_info_vector
 #include "constant_pool_info.hpp"
+// typedef method_info
 #include "class_file.hpp"
-#include "attributes.hpp"
 
 const uint64_t JAVA_NULL = 0;
 const uint8_t CAT_NULL = 0;
@@ -51,16 +52,21 @@ struct JavaType {
  */
 class Frame {
 private:
+    //MethodInfo* method;
     method_info* method;
+    // vector<method_info> method;
+    // CodeAttribute codeAttribute;
     Code_attribute codeAttribute;
 public:
-    cp_info_vector constantPool;
+    //vector<CPInfo*> constantPool;
+    cp_info_vector* constantPool;
     stack<JavaType> operandStack;
     vector<JavaType> localVariables;
     stack<Frame>* jvmStack;
     uint32_t localPC;
     // Frame(vector<JavaType>, stack<JavaType>, vector<CPInfo*>);
-    Frame(cp_info_vector, method_info*, stack<Frame>*);
+    //Frame(vector<CPInfo*>, MethodInfo*, stack<Frame>*);
+    Frame(cp_info_vector, method_info*, stack<Frame>*);;
     uint8_t* getCode() {
         return &(this->codeAttribute.code[0]);
     }

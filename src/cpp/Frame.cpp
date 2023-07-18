@@ -18,7 +18,7 @@ Frame::Frame(cp_info_vector constantPool, method_info* method, stack<Frame>* jvm
     vector<shared_ptr<Attribute>> attributes = method->attr;
     int i;
 
-    this->constantPool = constantPool;
+    this->constantPool = &constantPool;
     this->method = method;
     this->jvmStack = jvmStack;
 
@@ -36,14 +36,15 @@ Frame::Frame(cp_info_vector constantPool, method_info* method, stack<Frame>* jvm
     }
 
     if (foundCode) {
-        Attribute_Info attribute = *attributes[i];
+        Attribute_Info attribute = *to_attr_info(attributes[i]);
         uint16_t maxLocals = attribute.getCodeAttribute().max_locals;
-        this->codeAttribute = attribute.getCodeAttribute();
+        this->codeAttribute = &(attribute.getCodeAttribute());
         this->localVariables = vector<JavaType>(maxLocals);
         this->localPC = 0;
     }
     else {
-        printf("Atributo Code nao encontrado no metodo [%d]\n", method->);
+        
+        printf("Atributo Code nao encontrado no metodo [%d]\n", method->name_idx);
         exit(0);
     }
 }
