@@ -93,7 +93,7 @@ private:
     u2 major_version;
     u2 constant_pool_count;
     // vector<CPInfo*> constantPool;
-    cp_info_vector constant_pool;
+    
     u2 access_flag;
     u2 this_class;
     u2 super_class;
@@ -108,10 +108,12 @@ private:
     u2 attributes_count;
     uint16_t attributesCount;
     // AttributeInfo* attributes;
-    attr_info_vector attributes;
+    
 
     
 public:
+    cp_info_vector constant_pool;
+    attr_info_vector attributes;
     // static const uint32_t MAGIC_NUMBER = 0xCAFEBABE;
     // static const uint16_t ACC_PUBLIC = 0x0001;
     // static const uint16_t ACC_FINAL = 0x0010;

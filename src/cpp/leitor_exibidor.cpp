@@ -30,7 +30,7 @@ void ler_exibir_arquivo(class_file &class_f, string caminho_arquivo)
 
     arquivo_saida << "CLASSE: " << nome_arquivo << "" << endl << endl;
     exibir_informacoes_gerais(class_f);
-    exibir_constant_pool(class_f.getConstantPool());
+    exibir_constant_pool(class_f.constant_pool);
     exibir_interfaces(class_f);
     exibir_campos(class_f);
     exibir_metodos(class_f);
@@ -146,7 +146,7 @@ void exibir_campos(class_file &class_f)
         arquivo_saida << "- Attribute Count '" << field.attr_count << "'" << endl;
         
         arquivo_saida << "<details><summary>Show attributes</summary>" << endl << endl;
-        exibir_vetor_atributos(field.attr, class_f.getConstantPool());
+        exibir_vetor_atributos(field.attr, class_f.constant_pool);
         arquivo_saida << "________________________________________________________________" << endl << endl;
     }
     arquivo_saida <<  "________________________________________________________________"<<endl << endl;
@@ -178,7 +178,7 @@ void exibir_metodos(class_file &class_f)
         arquivo_saida << "- Attribute Count '" << method.attr_count << "'" << endl;
         
         arquivo_saida << endl << endl;
-        exibir_vetor_atributos(method.attr, class_f.getConstantPool());
+        exibir_vetor_atributos(method.attr, class_f.constant_pool);
     }
     arquivo_saida << "________________________________________________________________" << endl << endl;
 }
@@ -189,7 +189,7 @@ void exibir_atributos_de_classe(class_file &class_fp)
     class_file &class_f = class_fp;
     arquivo_saida << "----------Attributes----------" << endl;
     arquivo_saida << "________________________________________________________________" << endl << endl;
-    exibir_vetor_atributos(class_f.getAttributes(), class_f.getConstantPool());
+    exibir_vetor_atributos(class_f.attributes, class_f.constant_pool);
     arquivo_saida << "________________________________________________________________"<< endl << endl;
 }
 

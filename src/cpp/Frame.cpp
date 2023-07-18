@@ -10,14 +10,12 @@
  */
 
 #include "../hpp/Frame.hpp"
+#include "../hpp/leitor_exibidor.hpp"
+#include "../hpp/utils.hpp"
 
-/** @fn Frame::Frame
- *  @brief Construtor
- *  @param constantPool do tipo CPInfo @param method do tipo MethodInfo @param jvmStack pilha do tipo Frame
- */
-Frame::Frame(vector<CPInfo*> constantPool, MethodInfo* method, stack<Frame>* jvmStack) {
-    uint16_t attributesCount = method->getAttributesCount();
-    AttributeInfo* attributes = method->getAttributes();
+Frame::Frame(cp_info_vector constantPool, method_info* method, stack<Frame>* jvmStack) {
+    uint16_t attributesCount = method->attr_count;
+    vector<shared_ptr<Attribute>> attributes = method->attr;
     int i;
 
     this->constantPool = constantPool;
@@ -26,9 +24,10 @@ Frame::Frame(vector<CPInfo*> constantPool, MethodInfo* method, stack<Frame>* jvm
 
     bool foundCode = false;
     for (i = 0; i < attributesCount && !foundCode; i++) {
-        AttributeInfo attribute = attributes[i];
-        uint16_t nameIndex = attribute.getAttributeNameIndex();
-        string attributeName = constantPool[nameIndex-1]->getInfo(constantPool).first;
+        Attribute attribute = *attributes[i];
+        uint16_t nomeIndex = attribute.attribute_nome_index;
+        // string attributeName = constantPool[nomeIndex-1]->getInfo(constantPool).first;
+        string attributeName = exibir_utf8(*(to_cp_info(constantPool[nomeIndex - 1])->_utf8));
 
         if (attributeName.compare("Code == 0")) {
             foundCode = true;
@@ -37,13 +36,14 @@ Frame::Frame(vector<CPInfo*> constantPool, MethodInfo* method, stack<Frame>* jvm
     }
 
     if (foundCode) {
-        uint16_t maxLocals = attributes[i].getCodeAttribute().getMaxLocals();
-        this->codeAttribute = attributes[i].getCodeAttribute();
+        Attribute_Info attribute = *attributes[i];
+        uint16_t maxLocals = attribute.getCodeAttribute().max_locals;
+        this->codeAttribute = attribute.getCodeAttribute();
         this->localVariables = vector<JavaType>(maxLocals);
         this->localPC = 0;
     }
     else {
-        printf("Atributo Code nao encontrado no metodo [%d]\n", method->getNameIndex());
+        printf("Atributo Code nao encontrado no metodo [%d]\n", method->);
         exit(0);
     }
 }

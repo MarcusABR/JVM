@@ -17,7 +17,7 @@
 #include <cmath>
 #include <vector>
 #include "Frame.hpp"
-#include "ClassLoader.hpp"
+#include "class_loader.hpp"
 
 using namespace std;
 /** @class Instruction
@@ -41,7 +41,7 @@ public:
     static map<string, JavaType>* initializeFields(class_file*);
     static vector<JavaType>* buildMultiAnewArray(vector<int>, int, char);
     static class_file* resolveClass(string);
-    static FieldInfo* resolveField(class_file*, string, string);
+    static field_info* resolveField(class_file*, string, string);
 
 
 

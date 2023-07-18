@@ -115,6 +115,26 @@ public:
         Unknown_attribute* _unknown;
     };
 
+    ConstantValue_attribute getConstantValueAttribute() {
+        return *_constantvalue;
+    }
+
+    Code_attribute getCodeAttribute() {
+        return *_code;
+    }
+
+    SourceFile_attribute getSourceFileAttribute() {
+        return *_sourcefile;
+    }
+
+    LineNumberTable_attribute getLineNumberTableAttribute() {
+        return *_linenumbertable;
+    }
+   
+    Exception_attribute getExceptionsAttribute() {
+        return *_exception;
+    }
+    
     void exibir_info(cp_info_vector&, unsigned int&);
 };
 
