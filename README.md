@@ -10,11 +10,14 @@ Software Básico
 - Moisés Felipe Jacó Andrade de Lima - 190018364
 - Matheus Barbosa e Silva - 190113987
 
-## Comandos
-Compilar: `$ make -f Makefile.win`  
-Leitor-exibidor: `$ ./jvm.exe ./examples/<nome_da_classe>.class`  
-Excluir build: `$ make clean -f Makefile.win`
-Docs: `$ doxygen Doxyfile` (`docs/index.html`)
+## Compilar
+A compilação é feita a partir de de um arquivo [makefile](https://www.gnu.org/software/make/). Utilize o comando `make` para compilar os arquivos.
+
+## Leitor-exibidor
+Para executar o leitor-exibidor utilize o comando `$ ./jvm.exe -e ./examples/<nome_da_classe>.class` para alguma das classes disponíveis no diretório `examples`. Será criado um novo diretório com um arquivo de texto relativo à classe escolhida, `out/<nome_da_classe>.txt`.
+
+## Interpretador
+Para executar o interpretador utilize o comando `$ ./jvm.exe -i ./examples/<nome_da_classe>.class` para alguma das classes disponíveis no diretório `examples`. Será impresso no terminal a execução do programa relativo à classe escolhida.
 
 ## Documentação
-É possível criar uma página HTML com a documentação do código utilizando o comando `$ doxygen Doxyfile` (é necessário ter o doxygen instalado). Em seguida, basta abrir o arquivo `index.html` na pasta 'docs' no navegador, e ele redirecionará você para a página de documentação.
+Documentação criada a partir do [Doxygen](https://www.doxygen.nl/index.html). Utilize o comando `$ dosygen Doxyfile`. Será criado um novo diretório, abro o arquivo `doxygen/files.html` no browser para visualizar a documentação.
