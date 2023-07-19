@@ -1,20 +1,3 @@
-/**
- * @file Frame.hpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Execução de um método. 
- * @details A biblioteca Frame.hpp possui os componentes necessários para execução de um método.
- * Define o uso para evitar a inclusão múltipla de arquivos.
- * Um novo frame é criado cada vez que um método é invocado. Um frame é destruído quando sua invocação de método é concluída.
- * Os quadros são alocados na pilha da JVM do thread que cria o frame. Cada frame tem seu próprio array de variáveis ​​locais, sua própria pilha de operandos e uma referência ao pool de constantes.
- * @see Frame.cpp
- * @see CPInfo.hpp
- * @see MethodInfo.hpp
- */
-
 #ifndef FRAME_H_INCLUDED
 #define FRAME_H_INCLUDED
 
@@ -55,12 +38,11 @@ private:
     //MethodInfo* method;
     method_info* method;
     // vector<method_info> method;
-    //CodeAttribute codeAttribute;
-    //Code_attribute codeAttribute;
+    // CodeAttribute codeAttribute;
     Code_attribute* codeAttribute;
 public:
     //vector<CPInfo*> constantPool;
-    cp_info_vector* constantPool;
+    cp_info_vector constantPool;
     stack<JavaType> operandStack;
     vector<JavaType> localVariables;
     stack<Frame>* jvmStack;
@@ -69,11 +51,10 @@ public:
     //Frame(vector<CPInfo*>, MethodInfo*, stack<Frame>*);
     Frame(cp_info_vector, method_info*, stack<Frame>*);;
     uint8_t* getCode() {
-        //return &(this->codeAttribute.code[0]);
-        return &(this->codeAttribute->code[0]);
+        
+        return &((this->codeAttribute)->code[0]);
     }
     uint32_t getCodeLength() {
-        //return this->codeAttribute.code_length;
         return this->codeAttribute->code_length;
     }
 };

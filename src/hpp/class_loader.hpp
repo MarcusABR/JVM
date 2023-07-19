@@ -2,7 +2,7 @@
 #define _CLASS_LOADER_HPP
 
 #include "class_file.hpp"
-#include "MethodArea.hpp"
+#include "method_area.hpp"
 
 class ClassLoader {
 private:

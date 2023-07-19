@@ -1,28 +1,14 @@
-/**
- * @file Instruction.hpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Descreve a estrutura de uma instrução
- * @details Tem como atributos uma string com o mnemônico da instrução e o número de bytes armazenado em um inteiro de 32 bits
- * @see Instruction.cpp
- */
-
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
 
 #include <string>
 #include <cmath>
 #include <vector>
-#include "Frame.hpp"
+#include "frame.hpp"
 #include "class_loader.hpp"
 
 using namespace std;
-/** @class Instruction
-*   @brief Classe que contém a estrutura de uma instrução a ser executada pelo interpretador; 
-*/
+
 class Instruction {
 private:
     string mnemonic;

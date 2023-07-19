@@ -1,11 +1,8 @@
 
 #include <iostream>
 #include <fstream>
-#include "../hpp/ClassFile.hpp"
-#include "../hpp/ClassLoader.hpp"
-// #include "../hpp/ClassPrinter.hpp"
-// #include "../hpp/ExecutionEngine.hpp"
-
+#include "../hpp/class_file.hpp"
+#include "../hpp/class_loader.hpp"
 #include "../hpp/libraries.hpp"
 
 using namespace std;

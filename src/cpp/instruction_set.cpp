@@ -1,21 +1,8 @@
-/**
- * @file InstructionSet.cpp
- * @author Ayssa Giovanna de Oliveira Marques - 170100065
- * @author Fernanda Macedo de Sousa - 170010058
- * @author Gabriel dos Santos Martins - 150126298
- * @author Lucas Raphael Ferreira de Miranda - 180046799 
- * @author Otávio Souza de Oliveira 150143401
- * @brief Implementa a classe InstructionSet
- * @see InstructionSet.hpp
- */
-#include "../hpp/InstructionSet.hpp"
+
+#include "../hpp/instruction_set.hpp"
 
 ClassLoader* Instruction::classLoader;
 
-/** @fn InstructionSet::InstructionSet
- *  @brief Construtor do instructionSet
- *  @param classLoader do tipo ClassLoader
- */
 InstructionSet::InstructionSet(ClassLoader * classLoader) {
     this->instructionsCount = 256;
     Instruction::setClassLoader(classLoader);
