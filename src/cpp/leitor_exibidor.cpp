@@ -1,3 +1,14 @@
+/**
+ * @file leitor_exibidor.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes das funcoes do leitor e exibidor
+ * @details Define a criacao de arquivos de saida, leitura de dados de um arqui-
+ * vo .class e diferenciacao dos dados lidos.
+**/
 #include "../hpp/leitor_exibidor.hpp"
 #include "../hpp/windows.hpp"
 #include "../hpp/utils.hpp"

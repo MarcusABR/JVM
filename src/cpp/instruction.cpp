@@ -1,3 +1,15 @@
+/**
+ * @file instruction.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes da classe Instruction
+ * @details Define comportamento de funcoes referentes a cada instrucao dentro 
+ * da JVM como membros de uma classe unica Instruction.
+ **/
+
 #include "../cpp/leitor_exibidor.cpp"
 #include "../hpp/instruction.hpp"
 #include <iostream>

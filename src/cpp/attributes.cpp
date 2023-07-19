@@ -1,3 +1,14 @@
+/**
+ * @file attributes.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definições de Attribute
+ * @details Define as caracteristicas da classe Attribute, como funcoes de
+ * informacao sobre atributo e sua interpretacao.                                                  
+**/
 #include "../hpp/attributes.hpp"
 #include "../hpp/leitor_exibidor.hpp"
 #include "../hpp/utils.hpp"

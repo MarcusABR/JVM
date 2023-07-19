@@ -1,3 +1,15 @@
+/**
+ * @file class_loader.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes do ClassLoader
+ * @details Definicoes de função de carga do ClassLoader como arquivos
+ * e superclasses.
+**/
+
 #include "../hpp/class_loader.hpp"
 #include "../hpp/class_file.hpp"
 #include "../hpp/utils.hpp"

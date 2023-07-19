@@ -1,4 +1,13 @@
-
+/**
+ * @file execution_engine.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes da classe ExecutionEngine
+ * @details Define busca de metodo principal e funcao execute do motor.
+**/
 #include "../hpp/execution_engine.hpp"
 #include "../include/leitor_exibidor.hpp"
 

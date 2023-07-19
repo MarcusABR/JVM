@@ -1,3 +1,15 @@
+/**
+ * @file frame.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes da classe Frame
+ * @details Define a carga de um frame da JVM a partir da constant pool, informa-
+ * cao do metodo e um ponteiro do frame.
+**/
+
 #include "../hpp/frame.hpp"
 #include "../hpp/leitor_exibidor.hpp"
 #include "../hpp/utils.hpp"
