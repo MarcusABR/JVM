@@ -1,0 +1,21 @@
+make:
+	mkdir build\.\src\cpp\
+
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\constant_pool_info.cpp -o build\.\src\cpp\constant_pool_info.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\utils.cpp -o build\.\src\cpp\utils.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\leitor_exibidor.cpp -o build\.\src\cpp\leitor_exibidor.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\attributes.cpp -o build\.\src\cpp\attributes.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\class_file.cpp -o build\.\src\cpp\class_file.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\class_loader.cpp -o build\.\src\cpp\class_loader.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\execution_engine.cpp -o build\.\src\cpp\execution_engine.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\instruction_set.cpp -o build\.\src\cpp\instruction_set.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\frame.cpp -o build\.\src\cpp\frame.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\instruction.cpp -o build\.\src\cpp\instruction.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\java_virtual_machine_thread.cpp -o build\.\src\cpp\java_virtual_machine_thread.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\method_area.cpp -o build\.\src\cpp\method_area.o
+	g++ -std=c++11 -I.\src\hpp -c src\cpp\main.cpp -o build\.\src\cpp\main.o
+	
+	g++ -std=c++11 .\build\.\src\cpp\constant_pool_info.o .\build\.\src\cpp\utils.o .\build\.\src\cpp\leitor_exibidor.o .\build\.\src\cpp\attributes.o .\build\.\src\cpp\class_file.o .\build\.\src\cpp\class_loader.o .\build\.\src\cpp\execution_engine.o .\build\.\src\cpp\instruction_set.o .\build\.\src\cpp\frame.o .\build\.\src\cpp\instruction.o .\build\.\src\cpp\java_virtual_machine_thread.o .\build\.\src\cpp\method_area.o .\build\.\src\cpp\main.o -o jvm
+
+clean:
+	rmdir /s build

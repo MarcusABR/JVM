@@ -99,6 +99,9 @@ void class_file::pushAttributes(shared_ptr<Attribute> attribute){
     this->attributes.push_back(attribute);
 };
 
+class_file::class_file(){
+
+}
 // void ClassFile::setMagic(FILE * fp) {
 //     ByteReader<typeof(magic)> magicReader;
 //     magic = magicReader.byteCatch(fp);

@@ -1,6 +1,6 @@
-#include "../include/utils.hpp"
-#include "../include/class_file.hpp"
-#include "../include/leitor_exibidor.hpp"
+#include "../hpp/utils.hpp"
+#include "../hpp/class_file.hpp"
+#include "../hpp/leitor_exibidor.hpp"
 #include <cmath>
 #include <limits>
 #include <sys/stat.h>

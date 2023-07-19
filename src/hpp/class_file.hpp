@@ -124,7 +124,7 @@ public:
     // static const uint16_t ACC_ANNOTATION = 0x2000;
     // static const uint16_t ACC_ENUM = 0x4000;
     class_file();
-    ~class_file();
+    //~class_file();
 
     u4 getMagic() {
         return magic;

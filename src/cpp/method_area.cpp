@@ -1,4 +1,4 @@
-#include "../hpp/MethodArea.hpp"
+#include "../hpp/method_area.hpp"
 #include "../cpp/leitor_exibidor.cpp"
 
 void MethodArea::insertClass(class_file classFile) {

@@ -7,11 +7,11 @@
 
 using namespace std;
 
-unsigned int pos_counter = 0;
+inline unsigned int pos_counter = 0;
 
-ofstream arquivo_saida;
+inline ofstream arquivo_saida;
 
-void criar_arquivo_saida(string nome_arquivo)
+inline void criar_arquivo_saida(string nome_arquivo)
 {
     create_dir();
     arquivo_saida = ofstream("./out/" + nome_arquivo + ".txt");
@@ -41,7 +41,7 @@ void ler_exibir_arquivo(class_file &class_f, string caminho_arquivo)
     cout << "Arquivo: \"" << nome_arquivo + ".txt\" criado com sucesso em /out/" << endl;
 }
 
-void exibir_informacoes_gerais(class_file &class_f)
+inline void exibir_informacoes_gerais(class_file &class_f)
 {
     arquivo_saida << "----------Informações Gerais----------" << endl;
     ios_base::fmtflags f(arquivo_saida.flags());
@@ -76,14 +76,14 @@ void exibir_informacoes_gerais(class_file &class_f)
     arquivo_saida << endl;
 }
 
-string get_versao(u2 major, u2 minor)
+inline string get_versao(u2 major, u2 minor)
 {
     if (major >= 45 && major <= 48)
         return "1." + to_string(major - 45 + 1);
     return to_string(major - 49 + 5);
 }
 
-void exibir_constant_pool(cp_info_vector &constant_pool)
+inline void exibir_constant_pool(cp_info_vector &constant_pool)
 {
     unsigned int cp_counter = 1;
     arquivo_saida << "----------Constant Pool----------" << endl << endl << endl;
@@ -97,7 +97,7 @@ void exibir_constant_pool(cp_info_vector &constant_pool)
 }
 
 
-string exibir_utf8(CONSTANT_utf8_info &utf8)
+inline string exibir_utf8(CONSTANT_utf8_info &utf8)
 {
     string out = "";
     for (auto j : utf8.bytes)
@@ -106,7 +106,7 @@ string exibir_utf8(CONSTANT_utf8_info &utf8)
 }
 
 
-void exibir_interfaces(class_file &class_f)
+inline void exibir_interfaces(class_file &class_f)
 {
     arquivo_saida << "----------Interfaces----------" << endl << endl;
     arquivo_saida << "________________________________________________________________" <<endl << endl;
@@ -121,7 +121,7 @@ void exibir_interfaces(class_file &class_f)
 }
 
 
-void exibir_campos(class_file &class_f)
+inline void exibir_campos(class_file &class_f)
 {
     unsigned int field_counter = 0;
     arquivo_saida << "----------Fields----------" << endl << endl;
@@ -153,7 +153,7 @@ void exibir_campos(class_file &class_f)
 }
 
 
-void exibir_metodos(class_file &class_f)
+inline void exibir_metodos(class_file &class_f)
 {
     unsigned int method_counter = 0;
     arquivo_saida << "----------Methods----------" << endl;
@@ -184,7 +184,7 @@ void exibir_metodos(class_file &class_f)
 }
 
 
-void exibir_atributos_de_classe(class_file &class_fp)
+inline void exibir_atributos_de_classe(class_file &class_fp)
 {
     class_file &class_f = class_fp;
     arquivo_saida << "----------Attributes----------" << endl;
@@ -194,7 +194,7 @@ void exibir_atributos_de_classe(class_file &class_fp)
 }
 
 
-void exibir_vetor_atributos(attr_info_vector &attr_vector, cp_info_vector &constant_pool)
+inline void exibir_vetor_atributos(attr_info_vector &attr_vector, cp_info_vector &constant_pool)
 {
     unsigned int attr_counter = 0;
     for (auto attr : attr_vector)
