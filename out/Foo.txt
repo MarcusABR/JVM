@@ -1,7 +1,7 @@
 CLASSE: Foo
 
 ----------Informações Gerais----------
-Magic '0x809B6590'  
+Magic '0xEE866590'  
 Minor version '0'  
 Major version '46'['1.2']  
 Constant Pool Count '37'  

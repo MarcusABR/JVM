@@ -871,7 +871,6 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-#INPUT                  = "/Users/gabrielmartins/Documentos/UnB/2021:1/Software Basico/Projeto_JVM/JVM/src"
 INPUT                  = "C:\Users\andre\OneDrive\Área de Trabalho\UnB\9_SEMESTRE\SOFTWARE_BASICO\trabalho_JVM\rep\JVM\src\cpp"
 
 # This tag can be used to specify the character encoding of the source files
