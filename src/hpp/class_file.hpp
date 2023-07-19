@@ -139,6 +139,7 @@ public:
         return constant_pool_count;
     }
     cp_info_vector getConstantPool() {
+        printf("retornou constant pool\n");
         return constant_pool;
     }
 
@@ -146,6 +147,7 @@ public:
         return access_flag;
     }
     u2 getThisClass() {
+        printf("retornou this class\n");
         return this_class;
     }
     u2 getSuperClass() {

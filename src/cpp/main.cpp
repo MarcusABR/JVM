@@ -4,7 +4,7 @@
 #include "../hpp/class_file.hpp"
 #include "../hpp/class_loader.hpp"
 #include "../hpp/libraries.hpp"
-#include "../hpp/leitor_exibidor.hpp"
+#include "../cpp/leitor_exibidor.cpp"
 #include "../hpp/execution_engine.hpp"
 
 using namespace std;
@@ -62,11 +62,18 @@ int main(int argc, char *argv[]) {
 
             // ClassPrinter classPrinter(classFile, &instructionSet); //Trocar pelo antigo
             auto nome_arquivo = static_cast<string>(argv[argc - 1]);
+
+            printf("nome_arquivo\n");
     
             ClassLoader loader;
+
+            printf("loader\n");
+
             class_file *arquivo_de_entrada = loader.carregar(nome_arquivo);
 
-            //ler_exibir_arquivo(*arquivo_de_entrada, nome_arquivo);
+            printf("class_file\n");
+
+            ler_exibir_arquivo(*arquivo_de_entrada, nome_arquivo);
 
             delete arquivo_de_entrada;
         }
@@ -91,5 +98,7 @@ int main(int argc, char *argv[]) {
             cout << "O segundo argumento deve ser -e para exibidor ou -i para interpredaor" << endl;
         }
     }
+
+    printf("fim\n");
     return 0;
 }

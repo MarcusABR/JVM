@@ -1,0 +1,187 @@
+CLASSE: Foo
+
+----------Informações Gerais----------
+Magic '0x8DF06590'  
+Minor version '0'  
+Major version '46'['1.2']  
+Constant Pool Count '37'  
+Access Flags '0x0020' [' ACC_SUPER ']  
+This Class '7' '<Foo>'  
+Super Class '10' '<Goo>'  
+Interfaces Count '30313'  
+Fields Count '0'  
+Methods Count '0'  
+Attributes Count '0'
+
+----------Constant Pool----------
+
+
+--> [1] *CONSTANT_Methodref_info*
+- Class Index '10'
+- Name And Type Index '20'
+
+--> [2] *CONSTANT_Fieldref_info*
+- Class Index '21'
+- Class Name '<java/lang/System>'
+- Name And Type Index '22'
+- Name And Type '<out:Ljava/io/PrintStream;>'
+
+--> [3] *CONSTANT_String_info*
+- String Index '23'
+- String '<2>'
+
+--> [4] *CONSTANT_Methodref_info*
+- Class Index '24'
+- Name And Type Index '25'
+
+--> [5] *CONSTANT_String_info*
+- String Index '26'
+- String '<3>'
+
+--> [6] *CONSTANT_String_info*
+- String Index '27'
+- String '<4>'
+
+--> [7] *CONSTANT_Class_info*
+- Name Index '28'
+- Class Name '<Foo>'
+
+--> [8] *CONSTANT_Methodref_info*
+- Class Index '7'
+- Name And Type Index '20'
+
+--> [9] *CONSTANT_String_info*
+- String Index '29'
+- String '<1>'
+
+--> [10] *CONSTANT_Class_info*
+- Name Index '30'
+- Class Name '<Goo>'
+
+--> [11] *CONSTANT_Utf8_info*
+- Length '6'
+- Bytes [ '<init>']
+
+--> [12] *CONSTANT_Utf8_info*
+- Length '3'
+- Bytes [ '()V']
+
+--> [13] *CONSTANT_Utf8_info*
+- Length '4'
+- Bytes [ 'Code']
+
+--> [14] *CONSTANT_Utf8_info*
+- Length '15'
+- Bytes [ 'LineNumberTable']
+
+--> [15] *CONSTANT_Utf8_info*
+- Length '4'
+- Bytes [ 'main']
+
+--> [16] *CONSTANT_Utf8_info*
+- Length '22'
+- Bytes [ '([Ljava/lang/String;)V']
+
+--> [17] *CONSTANT_Utf8_info*
+- Length '8'
+- Bytes [ '<clinit>']
+
+--> [18] *CONSTANT_Utf8_info*
+- Length '10'
+- Bytes [ 'SourceFile']
+
+--> [19] *CONSTANT_Utf8_info*
+- Length '8'
+- Bytes [ 'Foo.java']
+
+--> [20] *CONSTANT_NameAndType_info*
+- Name Index '11'
+- Descriptor Index '12'
+
+--> [21] *CONSTANT_Class_info*
+- Name Index '31'
+- Class Name '<java/lang/System>'
+
+--> [22] *CONSTANT_NameAndType_info*
+- Name Index '32'
+- Descriptor Index '33'
+
+--> [23] *CONSTANT_Utf8_info*
+- Length '1'
+- Bytes [ '2']
+
+--> [24] *CONSTANT_Class_info*
+- Name Index '34'
+- Class Name '<java/io/PrintStream>'
+
+--> [25] *CONSTANT_NameAndType_info*
+- Name Index '35'
+- Descriptor Index '36'
+
+--> [26] *CONSTANT_Utf8_info*
+- Length '1'
+- Bytes [ '3']
+
+--> [27] *CONSTANT_Utf8_info*
+- Length '1'
+- Bytes [ '4']
+
+--> [28] *CONSTANT_Utf8_info*
+- Length '3'
+- Bytes [ 'Foo']
+
+--> [29] *CONSTANT_Utf8_info*
+- Length '1'
+- Bytes [ '1']
+
+--> [30] *CONSTANT_Utf8_info*
+- Length '3'
+- Bytes [ 'Goo']
+
+--> [31] *CONSTANT_Utf8_info*
+- Length '16'
+- Bytes [ 'java/lang/System']
+
+--> [32] *CONSTANT_Utf8_info*
+- Length '3'
+- Bytes [ 'out']
+
+--> [33] *CONSTANT_Utf8_info*
+- Length '21'
+- Bytes [ 'Ljava/io/PrintStream;']
+
+--> [34] *CONSTANT_Utf8_info*
+- Length '19'
+- Bytes [ 'java/io/PrintStream']
+
+--> [35] *CONSTANT_Utf8_info*
+- Length '7'
+- Bytes [ 'println']
+
+--> [36] *CONSTANT_Utf8_info*
+- Length '21'
+- Bytes [ '(Ljava/lang/String;)V']
+
+________________________________________________________________
+
+----------Interfaces----------
+
+________________________________________________________________
+
+----------Fields----------
+
+
+
+________________________________________________________________
+
+----------Methods----------
+
+
+________________________________________________________________
+
+----------Attributes----------
+________________________________________________________________
+
+
+________________________________________________________________
+
