@@ -1,14 +1,14 @@
 CLASSE: multi
 
 ----------Informações Gerais----------
-Magic '0x15096590'  
+Magic '0x21566590'  
 Minor version '0'  
 Major version '46'['1.2']  
 Constant Pool Count '35'  
 Access Flags '0x0020' [' ACC_SUPER ']  
 This Class '8' '<multi>'  
 Super Class '9' '<java/lang/Object>'  
-Interfaces Count '30313'  
+Interfaces Count '25974'  
 Fields Count '0'  
 Methods Count '0'  
 Attributes Count '0'

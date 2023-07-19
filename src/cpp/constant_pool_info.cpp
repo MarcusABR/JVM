@@ -1,3 +1,15 @@
+/**
+ * @file constant_pool_info.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicoes relacionadas ao Constant Pool
+ * @details Definicoes de informacao e tipo de item pertencente a constant
+ * pool.
+**/
+
 #include "../hpp/constant_pool_info.hpp"
 #include "../hpp/class_file.hpp"
 #include "../hpp/leitor_exibidor.hpp"

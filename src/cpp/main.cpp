@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author André Larrosa Chimpliganond - 190010321
+ * @author Marcus Vinicius Oliveira de Abrantes - 190034084
+ * @author  Matheus Barbosa e Silva - 190113987
+ * @author Moises Felipe Jaco Andrade de Lima - 190018364 
+ * @author Thiago Elias dos Reis - 190126892
+ * @brief Definicao da funcao main do programa 
+ * @details Carrega arquivo de classe e executa rotina de leitura e exibicao.
+**/
 
 #include <iostream>
 #include <fstream>
