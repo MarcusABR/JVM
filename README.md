@@ -17,4 +17,4 @@ Excluir build: `$ make clean -f Makefile.win`
 Docs: `$ doxygen Doxyfile` (`docs/index.html`)
 
 ## Documentação
-É possível criar uma página HTML com a documentação do código utilizando o comando $ doxygen Doxyfile (é necessário ter o doxygen instalado). Em seguida, basta abrir o arquivo index.html na pasta 'docs' no navegador, e ele redirecionará você para a página de documentação.
+É possível criar uma página HTML com a documentação do código utilizando o comando `$ doxygen Doxyfile` (é necessário ter o doxygen instalado). Em seguida, basta abrir o arquivo `index.html` na pasta 'docs' no navegador, e ele redirecionará você para a página de documentação.
