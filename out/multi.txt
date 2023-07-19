@@ -1,7 +1,7 @@
 CLASSE: multi
 
 ----------Informações Gerais----------
-Magic '0xD1676590'  
+Magic '0x15096590'  
 Minor version '0'  
 Major version '46'['1.2']  
 Constant Pool Count '35'  

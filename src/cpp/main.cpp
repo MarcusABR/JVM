@@ -58,27 +58,16 @@ int main(int argc, char *argv[]) {
         string option = argv[1];
 
         if (option.compare("-e") == 0) {
-            printf("e\n");
-
             // ClassPrinter classPrinter(classFile, &instructionSet); //Trocar pelo antigo
             auto nome_arquivo = static_cast<string>(argv[argc - 1]);
-
-            printf("nome_arquivo\n");
-    
             ClassLoader loader;
-
-            printf("loader\n");
-
             class_file *arquivo_de_entrada = loader.carregar(nome_arquivo);
-
-            printf("class_file\n");
 
             ler_exibir_arquivo(*arquivo_de_entrada, nome_arquivo);
 
             delete arquivo_de_entrada;
         }
         else if (option.compare("-i") == 0) {
-            printf("i\n");
             //string projectPath = getProjectPath(argv[2]);
 
             //classLoader.loadSuperClasses(&classFile);
@@ -98,7 +87,5 @@ int main(int argc, char *argv[]) {
             cout << "O segundo argumento deve ser -e para exibidor ou -i para interpredaor" << endl;
         }
     }
-
-    printf("fim\n");
     return 0;
 }

@@ -6,29 +6,17 @@
 
 class_file* ClassLoader::carregar(string &filename)
 {
-    printf("dentro loader\n");
     class_file *class_f = new class_file;
     file = abrir_arquivo(filename);
 
     get_metadata(class_f);
-
-    printf("passou get_metadata\n");
-    
     get_constant_pool(class_f);
-    printf("get_constant_pool\n");
     get_class_data(class_f);
-    printf("get_class_data\n");
     get_interfaces(class_f);
-    printf("get_interfaces\n");
     get_fields(class_f);
-    printf("get_fields\n");
     get_methods(class_f);
-    printf("get_methods\n");
     get_attributes(class_f);
-    printf("get_attributes\n");
     //methodArea->insertClass(*class_f);
-
-    printf("vai retornar class file\n");
 
     return class_f;
 }
